@@ -1,0 +1,1953 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Log de la Grand Line — Chronique complète de One Piece</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;900&amp;family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<style>
+/* ============================================================
+   DESIGN TOKENS
+   Deux registres visuels qui coexistent dans un même carnet :
+   - Registre "Carnet de bord" (parchemin/encre/or) pour East Blue → Wano
+   - Registre "Punk Records" (bleu de plan/cyan) pour Egghead → Elbaf
+   Le glissement de palette EST le message : le récit lui-même
+   bascule d'une aventure de pirates vers un dossier scientifique
+   de secrets d'État à partir d'Egghead.
+   ============================================================ */
+:root{
+  --ink:#0d0f16;
+  --ink-2:#151926;
+  --ink-3:#1c2133;
+  --parchment:#eee2c4;
+  --parchment-2:#e4d5ab;
+  --parchment-ink:#2b2312;
+  --gold:#c9a24b;
+  --gold-bright:#e8c876;
+  --red:#a53a2f;
+  --red-bright:#d1573f;
+  --blueprint:#4fb8c9;
+  --blueprint-bright:#8fe0ee;
+  --teal-deep:#0f2b32;
+  --teal-card:#123842;
+  --text-hi:#f4efe0;
+  --text-mid:#c9c2ab;
+  --text-dim:#8d8770;
+  --serif-display:'Cinzel', 'Times New Roman', serif;
+  --serif-body:'Crimson Pro', Georgia, 'Times New Roman', serif;
+  --mono:'JetBrains Mono', 'Consolas', monospace;
+  --radius:3px;
+  --maxw:920px;
+}
+html[data-theme="light"]{
+  --ink:#f7f2e4;
+  --ink-2:#efe7d2;
+  --ink-3:#e6dbc0;
+  --parchment:#fffaf0;
+  --parchment-2:#f3e9cf;
+  --gold:#96700f;
+  --gold-bright:#7a570a;
+  --red:#a53a2f;
+  --red-bright:#8a2b21;
+  --blueprint:#136e7d;
+  --blueprint-bright:#0c525d;
+  --teal-deep:#e4f2f3;
+  --teal-card:#eef8f8;
+  --text-hi:#1b1710;
+  --text-mid:#463f2b;
+  --text-dim:#726a4e;
+}
+html[data-theme="light"] body{
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(150,112,15,0.05), transparent 45%),
+    radial-gradient(ellipse at 80% 20%, rgba(19,110,125,0.05), transparent 40%),
+    var(--ink);
+}
+html[data-theme="light"] ::selection{background:var(--gold); color:#fff;}
+html[data-theme="light"] .hero::before{opacity:0.25;}
+html[data-theme="light"] .compass{border-color:var(--gold);}
+html[data-theme="light"] blockquote{background:rgba(150,112,15,0.06);}
+html[data-theme="light"] .toc-rail{background:var(--ink-2);}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation:none !important; transition:none !important;} }
+
+body{
+  margin:0;
+  transition:background-color .25s ease, color .25s ease;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(201,162,75,0.06), transparent 45%),
+    radial-gradient(ellipse at 80% 20%, rgba(79,184,201,0.05), transparent 40%),
+    var(--ink);
+  color:var(--text-hi);
+  font-family:var(--serif-body);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{color:var(--gold-bright);}
+::selection{background:var(--gold); color:var(--ink);}
+
+/* ---------- Layout shell ---------- */
+.shell{display:flex; max-width:1400px; margin:0 auto; position:relative;}
+.toc-rail{
+  width:250px; flex-shrink:0; position:sticky; top:0; align-self:flex-start;
+  height:100vh; overflow-y:auto; padding:28px 14px 40px 22px;
+  border-right:1px solid rgba(201,162,75,0.15);
+  scrollbar-width:thin; scrollbar-color:var(--gold) transparent;
+}
+.toc-rail::-webkit-scrollbar{width:6px;}
+.toc-rail::-webkit-scrollbar-thumb{background:rgba(201,162,75,0.4); border-radius:4px;}
+.toc-brand{
+  font-family:var(--serif-display); font-size:13px; letter-spacing:2px; color:var(--gold);
+  text-transform:uppercase; margin-bottom:18px; opacity:0.85;
+}
+.toc-rail nav a{
+  display:block; font-size:13.5px; color:var(--text-mid); text-decoration:none;
+  padding:5px 8px; border-left:2px solid transparent; margin-bottom:1px;
+  transition:color .15s, border-color .15s, background .15s;
+  border-radius:0 3px 3px 0;
+}
+.toc-rail nav a:hover{color:var(--gold-bright); border-left-color:var(--gold); background:rgba(201,162,75,0.06);}
+.toc-rail nav .toc-part{
+  font-family:var(--serif-display); font-size:11px; letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--blueprint-bright); margin:16px 0 6px; opacity:.9;
+}
+.toc-rail nav .toc-part:first-child{margin-top:0;}
+.toc-rail nav a.toc-sub{padding-left:18px; font-size:12.5px; color:var(--text-dim);}
+
+.main-col{flex:1; min-width:0; padding:0 0 100px;}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+
+#toc-toggle{display:none;}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative; padding:80px 32px 60px; text-align:center; overflow:hidden;
+  border-bottom:1px solid rgba(201,162,75,0.2);
+  background:
+    linear-gradient(180deg, rgba(201,162,75,0.05), transparent 60%);
+}
+.hero::before{
+  content:""; position:absolute; inset:0; opacity:0.5; pointer-events:none;
+  background-image:
+    radial-gradient(circle at 50% 50%, transparent 0, transparent 130px, rgba(201,162,75,0.07) 131px, transparent 133px),
+    radial-gradient(circle at 50% 50%, transparent 0, transparent 190px, rgba(201,162,75,0.05) 191px, transparent 193px);
+  background-position:center -60px;
+}
+.compass{
+  width:74px; height:74px; margin:0 auto 22px; position:relative;
+  border:1.5px solid var(--gold); border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+}
+.compass::before{
+  content:"✦"; color:var(--gold-bright); font-size:26px;
+}
+.compass::after{
+  content:""; position:absolute; inset:-10px; border:1px solid rgba(201,162,75,0.35); border-radius:50%;
+}
+.hero .kicker{
+  font-family:var(--mono); font-size:12px; letter-spacing:3px; text-transform:uppercase;
+  color:var(--blueprint-bright); margin-bottom:14px;
+}
+.hero h1{
+  font-family:var(--serif-display); font-weight:700; font-size:clamp(2.1rem, 5vw, 3.4rem);
+  margin:0 0 14px; line-height:1.15; color:var(--text-hi);
+  text-shadow:0 2px 24px rgba(201,162,75,0.15);
+}
+.hero h1 em{font-style:normal; color:var(--gold-bright);}
+.hero p.lede{
+  max-width:640px; margin:0 auto; color:var(--text-mid); font-size:19px; line-height:1.7;
+}
+.hero-stats{
+  display:flex; gap:28px; justify-content:center; margin-top:36px; flex-wrap:wrap;
+}
+.hero-stats div{text-align:center;}
+.hero-stats .num{font-family:var(--serif-display); font-size:1.7rem; color:var(--gold-bright); display:block;}
+.hero-stats .lbl{font-family:var(--mono); font-size:10.5px; letter-spacing:1px; color:var(--text-dim); text-transform:uppercase;}
+
+/* ---------- Section scaffolding ---------- */
+.part-banner{
+  margin:70px 0 36px; padding:28px 30px; border-radius:var(--radius);
+  background:linear-gradient(135deg, rgba(201,162,75,0.1), rgba(201,162,75,0.02));
+  border:1px solid rgba(201,162,75,0.28); border-left:4px solid var(--gold);
+}
+.part-banner .eyebrow{font-family:var(--mono); font-size:11.5px; letter-spacing:2px; color:var(--gold); text-transform:uppercase;}
+.part-banner h2{font-family:var(--serif-display); font-size:1.9rem; margin:8px 0 10px; color:var(--text-hi);}
+.part-banner p{color:var(--text-mid); margin:0; max-width:70ch;}
+
+.part-banner.tech{
+  background:linear-gradient(135deg, rgba(79,184,201,0.12), rgba(79,184,201,0.02));
+  border-color:rgba(79,184,201,0.35); border-left-color:var(--blueprint);
+}
+.part-banner.tech .eyebrow{color:var(--blueprint-bright);}
+
+.saga{margin:56px 0;}
+.saga-head{
+  display:flex; align-items:baseline; gap:16px; margin-bottom:6px; flex-wrap:wrap;
+  border-bottom:2px solid var(--gold); padding-bottom:10px;
+}
+.saga-seal{
+  font-family:var(--serif-display); font-weight:700; font-size:13px; color:var(--ink);
+  background:var(--gold); width:34px; height:34px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.saga-head h3{font-family:var(--serif-display); font-size:1.5rem; margin:0; color:var(--text-hi); flex:1;}
+.saga-meta{font-family:var(--mono); font-size:11.5px; color:var(--text-dim);}
+.saga-intro{color:var(--text-mid); margin:14px 0 22px; font-size:16.5px;}
+
+.saga.tech .saga-head{border-bottom-color:var(--blueprint);}
+.saga.tech .saga-seal{background:var(--blueprint); color:var(--ink);}
+
+/* ---------- Arc cards ---------- */
+details.arc{
+  margin:16px 0; border:1px solid rgba(201,162,75,0.22); border-radius:var(--radius);
+  background:linear-gradient(160deg, rgba(238,226,196,0.035), rgba(238,226,196,0.01));
+}
+details.arc > summary{
+  cursor:pointer; list-style:none; padding:16px 20px; display:flex; align-items:center; gap:14px;
+  font-family:var(--serif-display); font-size:1.08rem; color:var(--text-hi); user-select:none;
+}
+details.arc > summary::-webkit-details-marker{display:none;}
+details.arc > summary::before{
+  content:"▸"; color:var(--gold); font-size:14px; transition:transform .18s; flex-shrink:0;
+}
+details.arc[open] > summary::before{transform:rotate(90deg);}
+details.arc > summary .arc-range{
+  font-family:var(--mono); font-size:11px; color:var(--text-dim); font-weight:400; margin-left:auto; white-space:nowrap;
+}
+.arc-body{padding:2px 22px 22px 46px;}
+.arc-body > p{margin:0 0 14px; color:var(--text-hi);}
+
+.tech details.arc{border-color:rgba(79,184,201,0.28); background:linear-gradient(160deg, rgba(18,56,66,0.4), rgba(18,56,66,0.15));}
+.tech details.arc > summary::before{color:var(--blueprint);}
+
+/* ---------- Info grid callouts ---------- */
+.info-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:12px; margin:14px 0 18px;}
+.info-box{
+  background:rgba(201,162,75,0.05); border:1px solid rgba(201,162,75,0.18); border-radius:var(--radius);
+  padding:13px 15px;
+}
+.info-box h4{
+  font-family:var(--mono); font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--gold-bright);
+  margin:0 0 8px; display:flex; align-items:center; gap:6px;
+}
+.info-box ul{margin:0; padding-left:18px; font-size:14.5px; color:var(--text-mid);}
+.info-box li{margin-bottom:5px;}
+.info-box p{margin:0; font-size:14.5px; color:var(--text-mid);}
+
+.tech .info-box{background:rgba(79,184,201,0.06); border-color:rgba(79,184,201,0.22);}
+.tech .info-box h4{color:var(--blueprint-bright);}
+
+/* ---------- Major event ---------- */
+.event{
+  margin:18px 0; border-radius:var(--radius); border:1px solid rgba(165,58,47,0.4);
+  background:linear-gradient(135deg, rgba(165,58,47,0.12), rgba(165,58,47,0.03));
+  padding:16px 20px;
+}
+.event h4{
+  font-family:var(--mono); font-size:11.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--red-bright);
+  margin:0 0 8px; display:flex; align-items:center; gap:7px;
+}
+.event p{margin:0 0 8px; color:var(--text-hi); font-size:15.5px;}
+.event .impact{
+  margin-top:10px; padding-top:10px; border-top:1px dashed rgba(165,58,47,0.3);
+  font-size:14px; color:var(--text-mid);
+}
+.event .impact strong{color:var(--red-bright); font-weight:600;}
+
+/* ---------- Reflection ---------- */
+.reflect{
+  margin:18px 0; padding:15px 20px; border-radius:var(--radius);
+  border-left:3px solid var(--blueprint); background:rgba(79,184,201,0.055);
+  font-style:italic; color:var(--text-mid); font-size:15.5px;
+}
+.reflect .tag{
+  font-style:normal; font-family:var(--mono); font-size:10.5px; letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--blueprint-bright); display:block; margin-bottom:6px;
+}
+.reflect strong{color:var(--text-hi); font-style:normal;}
+
+/* ---------- Diagram blocks ---------- */
+.diagram{
+  margin:34px 0; border:1px solid rgba(201,162,75,0.25); border-radius:var(--radius);
+  background:rgba(13,15,22,0.55); padding:22px 18px 14px; overflow-x:auto;
+}
+.diagram.tech-d{border-color:rgba(79,184,201,0.35);}
+.diagram .mermaid{display:flex; justify-content:center;}
+.diagram-cap{
+  font-family:var(--mono); font-size:12px; color:var(--text-dim); text-align:center; margin-top:10px; padding-top:10px;
+  border-top:1px solid rgba(201,162,75,0.12);
+}
+.diagram-title{
+  font-family:var(--serif-display); font-size:1.15rem; text-align:center; margin:0 0 4px; color:var(--text-hi);
+}
+
+/* ---------- Image blocks ---------- */
+.img-block{
+  margin:20px 0;
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid rgba(201,162,75,0.15);
+  background:rgba(13,15,22,0.4);
+}
+.img-block img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:400px;
+  object-fit:cover;
+}
+.img-block .img-caption{
+  padding:10px 16px;
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--text-dim);
+  text-align:center;
+  border-top:1px solid rgba(201,162,75,0.1);
+}
+.img-block.tech-img{border-color:rgba(79,184,201,0.25);}
+.img-block.tech-img .img-caption{color:var(--blueprint-bright);}
+
+/* ---------- Misc typography ---------- */
+h2.section-h{font-family:var(--serif-display); font-size:1.7rem; margin:50px 0 16px; color:var(--text-hi); border-bottom:1px solid rgba(201,162,75,0.25); padding-bottom:10px;}
+h3.sub-h{font-family:var(--serif-display); font-size:1.25rem; margin:32px 0 12px; color:var(--gold-bright);}
+p{color:var(--text-hi);}
+.lede-p{color:var(--text-mid); font-size:16.5px;}
+.tag-row{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 20px;}
+.tag-pill{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:0.5px; padding:4px 10px; border-radius:20px;
+  background:rgba(201,162,75,0.1); border:1px solid rgba(201,162,75,0.3); color:var(--gold-bright);
+}
+.divider{
+  border:none; height:1px; margin:48px 0;
+  background:linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
+  opacity:0.4;
+}
+blockquote{
+  margin:20px 0; padding:14px 20px; border-left:3px solid var(--gold); background:rgba(201,162,75,0.05);
+  font-style:italic; color:var(--text-mid);
+}
+.char-mini{display:inline-block; font-family:var(--mono); font-size:12.5px; background:rgba(201,162,75,0.12); padding:2px 7px; border-radius:3px; color:var(--gold-bright); margin:2px 2px 2px 0;}
+table.data-table{width:100%; border-collapse:collapse; margin:18px 0; font-size:14.5px;}
+table.data-table th{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:0.5px; color:var(--gold-bright); text-align:left; padding:8px 12px; border-bottom:2px solid rgba(201,162,75,0.35);}
+table.data-table td{padding:8px 12px; border-bottom:1px solid rgba(201,162,75,0.12); color:var(--text-mid); vertical-align:top;}
+.tech table.data-table th{color:var(--blueprint-bright); border-bottom-color:rgba(79,184,201,0.4);}
+
+footer.colophon{
+  max-width:var(--maxw); margin:80px auto 0; padding:30px 32px 60px; text-align:center;
+  color:var(--text-dim); font-family:var(--mono); font-size:12px; border-top:1px solid rgba(201,162,75,0.15);
+}
+
+/* ---------- Mobile ---------- */
+.mobile-toc-btn{
+  display:none; position:fixed; bottom:20px; right:20px; z-index:50;
+  width:52px; height:52px; border-radius:50%; background:var(--gold); color:var(--ink);
+  align-items:center; justify-content:center; font-size:20px; border:none; box-shadow:0 4px 18px rgba(0,0,0,0.4);
+}
+.theme-toggle{
+  position:fixed; top:16px; right:16px; z-index:70;
+  display:flex; align-items:center; gap:7px;
+  background:var(--ink-2); color:var(--text-hi); border:1px solid rgba(201,162,75,0.4);
+  font-family:var(--mono); font-size:11.5px; letter-spacing:0.5px; text-transform:uppercase;
+  padding:8px 12px; border-radius:20px; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.25);
+}
+.theme-toggle:hover{border-color:var(--gold);}
+.theme-toggle .icon{font-size:14px;}
+@media (max-width:920px){
+  .toc-rail{
+    position:fixed; left:0; top:0; bottom:0; z-index:60; background:var(--ink-2);
+    transform:translateX(-100%); transition:transform .25s ease; box-shadow:6px 0 30px rgba(0,0,0,0.5);
+    width:78vw; max-width:300px;
+  }
+  #toc-toggle:checked ~ .shell .toc-rail{transform:translateX(0);}
+  .mobile-toc-btn{display:flex;}
+  .wrap{padding:0 18px;}
+  .hero{padding:56px 18px 40px;}
+  .theme-toggle{ top:auto; bottom:20px; left:20px; right:auto; }
+}
+a:focus-visible, summary:focus-visible, button:focus-visible{outline:2px solid var(--blueprint-bright); outline-offset:2px;}
+</style>
+</head>
+<body>
+<input type="checkbox" id="toc-toggle">
+<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Basculer entre mode sombre et mode clair">
+  <span class="icon" id="theme-icon">☀️</span><span id="theme-label">Mode clair</span>
+</button>
+<div class="shell">
+
+<aside class="toc-rail">
+  <div class="toc-brand">☙ Sommaire du Log ❧</div>
+  <nav>
+    <a href="#intro">Avant d'appareiller</a>
+
+    <div class="toc-part">Partie I — East Blue → Wano</div>
+    <a href="#frise">Frise chronologique</a>
+    <a class="toc-sub" href="#saga-eastblue">1 · East Blue</a>
+    <a class="toc-sub" href="#saga-alabasta">2 · Alabasta</a>
+    <a class="toc-sub" href="#saga-skypiea">3 · Skypiea</a>
+    <a class="toc-sub" href="#saga-water7">4 · Water 7</a>
+    <a class="toc-sub" href="#saga-thriller">5 · Thriller Bark</a>
+    <a class="toc-sub" href="#saga-summit">6 · Guerre au Sommet</a>
+    <a class="toc-sub" href="#saga-fishman">7 · Fishman Island</a>
+    <a class="toc-sub" href="#saga-dressrosa">8 · Punk Hazard &amp; Dressrosa</a>
+    <a class="toc-sub" href="#saga-zou">9 · Zou, Whole Cake, Reverie</a>
+    <a class="toc-sub" href="#saga-wano">10 · Wano Kuni</a>
+
+    <div class="toc-part">Interlude — Comprendre le monde</div>
+    <a href="#gouvernement">Le Gouvernement Mondial</a>
+    <a href="#genealogie">Arbres généalogiques</a>
+    <a href="#geographie">Géographie du monde</a>
+    <a href="#armes">Les Armes Antiques</a>
+
+    <div class="toc-part">Partie II — Jusqu'au ch. 1130</div>
+    <a class="toc-sub" href="#saga-egghead">11 · Egghead (ultra détaillé)</a>
+    <a class="toc-sub" href="#saga-elbaf">12 · Elbaf (début)</a>
+
+    <div class="toc-part">Pour aller plus loin</div>
+    <a href="#mysteres">Mystères non résolus</a>
+    <a href="#reflexions">Fil des réflexions</a>
+    <a href="#lexique">Lexique</a>
+  </nav>
+</aside>
+
+<main class="main-col">
+
+<section class="hero" id="intro">
+  <div class="compass"></div>
+  <div class="kicker">Carnet de bord confidentiel — De Fondation à Chapitre 1130</div>
+  <h1>Le Log de la <em>Grand Line</em></h1>
+  <p class="lede">Une relecture complète de One Piece, du départ de Luffy à Fūsha Village jusqu'aux premiers pas sur Elbaf : ce qui s'est passé, ce que ça a révélé, et ce que ça implique — pour le monde, pour les personnages, et pour vous en tant que lecteur qui reprend le fil.</p>
+  <div class="hero-stats">
+    <div><span class="num">~1130</span><span class="lbl">Chapitres couverts</span></div>
+    <div><span class="num">12</span><span class="lbl">Sagas majeures</span></div>
+    <div><span class="num">26+</span><span class="lbl">Années in-story</span></div>
+    <div><span class="num">2</span><span class="lbl">Registres du carnet</span></div>
+  </div>
+</section>
+
+<div class="wrap">
+
+<p class="lede-p" style="margin-top:40px;">Ce document est construit en deux temps, volontairement différents dans leur ton — comme l'histoire elle-même change de nature. <strong>La Partie I</strong> (East Blue → Wano) est un résumé <em>rapide mais dense</em> : l'essentiel de chaque arc, avec des encarts sur les personnages, l'Histoire, le Gouvernement Mondial et ses secrets, et un focus sur les événements charnières. <strong>La Partie II</strong> (Egghead → début d'Elbaf, jusqu'au chapitre 1130) est traitée <em>chapitre par chapitre</em>, en détail — c'est là que la série bascule dans son arc final et lâche vingt ans de mystères d'un coup. Des encarts <span style="color:var(--blueprint-bright)">💭 Réflexion</span> ponctuent tout le texte : politiques, morales, parfois simplement des vertiges narratifs à noter au passage.</p>
+
+<!-- IMAGE: L'équipage au complet -->
+<div class="img-block">
+  <img src="https://static.wikia.nocookie.net/onepiece/images/4/42/Straw_Hat_Pirates_after_timeskip_infobox.png/revision/latest/scale-to-width-down/1000?cb=20230210183930" alt="L'équipage du Chapeau de Paille après l'ellipse de deux ans" loading="lazy">
+  <div class="img-caption">L'équipage du Chapeau de Paille au complet après l'ellipse de deux ans — les neuf membres fondateurs, prêts pour le Nouveau Monde.</div>
+</div>
+
+</div>
+
+<div class="wrap">
+<h2 class="section-h" id="frise">Frise chronologique des sagas</h2>
+<p class="lede-p">Vue d'ensemble du parcours, saga par saga. Chaque bloc correspond à une tranche de chapitres et à une étape de la montée en puissance de Luffy — et de la lente révélation de ce que le Gouvernement Mondial cache.</p>
+</div>
+
+<div class="wrap">
+<div class="diagram">
+<div class="diagram-title">De Fûsha Village au seuil d'Elbaf</div>
+<div class="mermaid">
+timeline
+    title Les grandes sagas de One Piece
+    section Aube de l'aventure
+        East Blue (ch. 1-100) : Formation de l'équipage
+        Alabasta (ch. 101-217) : Une guerre civile déjouée
+    section Ciel et acier
+        Skypiea (ch. 218-302) : L'or d'un dieu déchu
+        Water 7 (ch. 303-441) : Trahison, famille choisie, guerre à Enies Lobby
+    section L'ombre de Marineford
+        Thriller Bark (ch. 442-489) : Zombies, ombres volées
+        Guerre au Sommet (ch. 490-580) : Mort d'Ace, fin de l'ère Barbe Blanche
+    section Le Nouveau Monde s'ouvre
+        Fishman Island (ch. 597-653) : Racisme, pardon, Poséidon
+        Punk Hazard et Dressrosa (ch. 654-801) : Chute d'un roi tyran
+    section Vers la tempête finale
+        Zou, Whole Cake, Reverie (ch. 802-908) : Familles, complots, premier indice sur Imu
+        Wano Kuni (ch. 909-1057) : Chute de deux Empereurs, Gear 5
+    section La Saga Finale
+        Egghead (ch. 1058-1125) : Le Siècle Vide dévoilé
+        Elbaf, ch. 1126 et suite : Vers Laugh Tale
+</div>
+<div class="diagram-cap">Diagramme Mermaid — les bornes de chapitres sont approximatives (découpage communément admis par le fandom).</div>
+</div>
+</div>
+
+<div class="wrap">
+<section class="saga" id="saga-eastblue">
+  <div class="saga-head">
+    <div class="saga-seal">1</div>
+    <h3>East Blue — la formation de l'équipage</h3>
+    <div class="saga-meta">Ch. 1–100 · env. 2 mois in-story</div>
+  </div>
+  <p class="saga-intro">Monkey D. Luffy quitte Fûsha Village avec un radeau, un chapeau de paille prêté par Shanks le Roux, et un rêve absurde : devenir Roi des Pirates. La saison East Blue n'a qu'un but narratif — assembler l'équipage de départ — mais elle plante déjà toutes les graines thématiques de la série : la famille choisie, l'injustice sociale, et la promesse faite à quelqu'un qu'on ne reverra peut-être jamais.</p>
+
+  <!-- IMAGE: Luffy enfant et Shanks -->
+  <div class="img-block">
+    <img src="https://static.wikia.nocookie.net/onepiece/images/1/1f/Luffy_and_Shanks_Anime_Infobox.png/revision/latest/scale-to-width-down/1000?cb=20230922142500" alt="Luffy enfant avec Shanks le Roux" loading="lazy">
+    <div class="img-caption">Luffy enfant, chapeau de paille sur la tête, aux côtés de Shanks le Roux — la promesse qui scellera l'aventure.</div>
+  </div>
+
+  <details class="arc" open>
+    <summary>Romance Dawn, Orange Town, Syrup Village <span class="arc-range">ch. 1–41</span></summary>
+    <div class="arc-body">
+      <p>Luffy recrute Roronoa Zoro (chasseur de primes déchu, épéiste solitaire) puis affronte le clown-pirate Buggy avant d'atteindre Syrup Village, où il embarque Nami (voleuse professionnelle) et Usopp (menteur pathologique, fils d'un membre de l'équipage de Shanks).</p>
+      
+      <!-- IMAGE: Zoro -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/8/86/Roronoa_Zoro_Anime_Post_Timeskip_Infobox.png/revision/latest/scale-to-width-down/500?cb=20210916180816" alt="Roronoa Zoro" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Roronoa Zoro, le premier lieutenant, portant fièrement ses trois sabres.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🧑‍🤝‍🧑 Personnages</h4>
+          <ul>
+            <li><strong>Zoro</strong> porte le sabre <em>Wado Ichimonji</em>, légué par Kuina, une amie d'enfance morte jeune — la promesse de devenir le meilleur épéiste du monde est un serment funéraire, pas une simple ambition.</li>
+            <li><strong>Nami</strong> vole systématiquement les pirates ; on ignore encore qu'elle rembourse une dette à un chef fishman nommé Arlong.</li>
+            <li><strong>Usopp</strong> est le fils de Yasopp, tireur d'élite dans l'équipage de Shanks — son mensonge favori (« mon père est un grand pirate ») est en réalité vrai.</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>🏛️ Gouvernement Mondial</h4>
+          <p>Premier contact avec le système des primes : la Marine chasse les pirates pour le compte du Gouvernement Mondial, qui n'est encore qu'un nom abstrait à ce stade.</p>
+        </div>
+      </div>
+      <div class="event">
+        <h4>⚡ Événement majeur — la première prime de Luffy</h4>
+        <p>Luffy reçoit une prime de 30 000 000 de berries après Orange Town, qui grimpera vite. Une prime n'est pas qu'un chiffre : c'est la reconnaissance officielle, par l'État, qu'un individu est devenu une menace pour l'ordre établi.</p>
+
+        <!-- IMAGE: Prime de Luffy -->
+        <div class="img-block" style="margin:12px 0;">
+          <img src="https://static.wikia.nocookie.net/onepiece/images/a/a6/Monkey_D._Luffy_Wanted_Poster_After_Wano_Arc.png/revision/latest/scale-to-width-down/500?cb=20230922142745" alt="Avis de recherche de Luffy" loading="lazy" style="max-height:300px;">
+          <div class="img-caption">L'avis de recherche de Luffy après Wano — 3 000 000 000 de berries, l'un des plus hauts du monde.</div>
+        </div>
+
+        <div class="impact"><strong>Portée :</strong> ce système de primes structurera tout le récit — il quantifie littéralement le danger que représente la liberté individuelle aux yeux du pouvoir.</div>
+      </div>
+    </div>
+  </details>
+
+  <details class="arc" open>
+    <summary>Baratie &amp; Arlong Park <span class="arc-range">ch. 42–95</span></summary>
+    <div class="arc-body">
+      <p>Sur le restaurant flottant Baratie, Luffy affronte le chasseur de primes Gin puis croise Dracule Mihawk, le meilleur épéiste du monde — Zoro se fait humilier en duel mais refuse d'abandonner, gagnant le respect de Mihawk. Sanji, cuisinier du Baratie, rejoint l'équipage. À Arlong Park, la véritable histoire de Nami éclate : son village est sous le racket de l'homme-poisson Arlong depuis des années.</p>
+
+      <!-- IMAGE: Sanji -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/7/7a/Sanji_Anime_Post_Timeskip_Infobox.png/revision/latest/scale-to-width-down/500?cb=20210916180825" alt="Sanji" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Sanji, le cuisinier de l'équipage, en tenue de combat.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🧑‍🤝‍🧑 Personnages</h4>
+          <ul>
+            <li><strong>Sanji</strong> rêve de trouver l'All Blue (une mer mythique où se rejoignent les quatre océans) ; il doit tout à Zeff, le patron du Baratie, qui s'est mutilé pour le nourrir alors qu'ils étaient naufragés.</li>
+            <li><strong>Mihawk</strong>, premier « monstre » de la série : il incarne un niveau de puissance que Zoro n'atteindra qu'après des années.</li>
+            <li><strong>Nami</strong> a vu sa mère adoptive, Bell-mère, exécutée par Arlong pour la protéger — elle vole les pirates depuis 8 ans pour racheter la liberté de son village.</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>🌍 Secrets du monde</h4>
+          <p>Premier aperçu du racisme anti-hommes-poissons <em>inversé</em> : Arlong hait les humains à cause de siècles de discrimination des Hommes-Poissons par les humains. Ce fil ne sera pleinement expliqué que ~500 chapitres plus tard, à Fishman Island.</p>
+        </div>
+      </div>
+      <div class="reflect">
+        <span class="tag">💭 Réflexion — la fabrique des monstres</span>
+        Arlong n'est pas écrit comme un simple méchant : c'est un produit de l'oppression qu'il a lui-même subie, qui la reproduit sur plus faible que lui. Oda pose ici, dès les 90 premiers chapitres, une question qui reviendra sans cesse dans la série : la violence systémique engendre-t-elle nécessairement plus de violence, ou existe-t-il une sortie du cycle (le pardon, la reconstruction) ?
+      </div>
+    </div>
+  </details>
+
+  <details class="arc" open>
+    <summary>Loguetown <span class="arc-range">ch. 96–100</span></summary>
+    <div class="arc-body">
+      <p>Ville natale <em>et</em> lieu d'exécution de Gol D. Roger, le premier Roi des Pirates. Luffy manque de se faire exécuter par le Capitaine de Marine Smoker (utilisateur Logia fumée) mais s'échappe grâce à un éclair providentiel. L'équipage s'engouffre dans la Grand Line via Reverse Mountain.</p>
+
+      <!-- IMAGE: Gol D. Roger -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/d/dd/Gol_D._Roger_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142628" alt="Gol D. Roger" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Gol D. Roger, le Roi des Pirates, dont les derniers mots ont déclenché l'Âge d'Or de la Piraterie.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🏛️ Gouvernement Mondial &amp; Histoire</h4>
+          <p>Rappel des derniers mots de Roger avant son exécution publique, 22 ans plus tôt : son trésor, le <strong>One Piece</strong>, existe bel et bien et attend au bout de la Grand Line. Cette phrase a littéralement déclenché « l'Âge d'Or de la Piraterie ».</p>
+        </div>
+      </div>
+      <div class="event">
+        <h4>⚡ Événement majeur — l'entrée dans la Grand Line</h4>
+        <p>L'équipage franchit Reverse Mountain, où les courants marins remontent une montagne pour rejoindre la Grand Line — un passage à sens unique vers le vrai début de l'aventure.</p>
+        <div class="impact"><strong>Portée :</strong> à partir d'ici, le monde entier retient son souffle à chaque tempête de Log Pose. La Grand Line n'est pas juste « plus dangereuse » : elle a sa propre physique (le magnétisme erratique, le Calm Belt infesté de Rois des Mers) qui explique pourquoi le Gouvernement Mondial a pu rester si longtemps maître du jeu — la géographie elle-même protège son pouvoir.</div>
+      </div>
+      <div class="reflect">
+        <span class="tag">💭 Réflexion — le pouvoir d'un mythe</span>
+        Toute la « Grande Ère de la Piraterie » repose sur une phrase prononcée en public, retransmise à tout le monde par les journaux du Gouvernement lui-même. Oda montre ici, très tôt, que les récits — pas seulement la force — façonnent l'Histoire : le Gouvernement a diffusé l'exécution de Roger pour effrayer les foules, et a obtenu l'effet inverse. Un motif qui reviendra à chaque « transmission mondiale » de la série (jusqu'au message de Vegapunk, bien plus tard).
+      </div>
+    </div>
+  </details>
+</section>
+</div>
+
+<div class="wrap">
+<section class="saga" id="saga-alabasta">
+  <div class="saga-head">
+    <div class="saga-seal">2</div>
+    <h3>Alabasta — la première guerre civile déjouée</h3>
+    <div class="saga-meta">Ch. 101–217</div>
+  </div>
+  <p class="saga-intro">Première vraie incursion dans la géopolitique du monde : un royaume entier, manipulé de l'intérieur par une organisation secrète, au bord de la guerre civile. Nico Robin (future archéologue de l'équipage) et Portgas D. Ace (frère juré de Luffy) font tous deux leur apparition ici — sans qu'on sache encore qui ils deviendront l'un pour l'autre.</p>
+
+  <!-- IMAGE: Nico Robin -->
+  <div class="img-block">
+    <img src="https://static.wikia.nocookie.net/onepiece/images/4/4e/Nico_Robin_Anime_Post_Timeskip_Infobox.png/revision/latest/scale-to-width-down/500?cb=20210916180825" alt="Nico Robin" loading="lazy" style="max-height:300px;">
+    <div class="img-caption">Nico Robin, l'archéologue de l'équipage, seule survivante du massacre d'Ohara.</div>
+  </div>
+
+  <details class="arc" open>
+    <summary>Whisky Peak &amp; Little Garden <span class="arc-range">ch. 103–135</span></summary>
+    <div class="arc-body">
+      <p>L'équipage tombe sans le savoir sur une base de <strong>Baroque Works</strong>, organisation criminelle secrète dirigée par « Mr. 0 ». Vivi, princesse d'Alabasta, voyage incognito avec eux sous le nom de code « Miss Wednesday » : elle infiltre l'organisation qui prépare le renversement de son propre royaume. À Little Garden, île préhistorique, l'équipage rencontre Dorry et Brogy, deux géants d'Elbaf qui se battent en duel depuis <strong>100 ans</strong> par pur code d'honneur.</p>
+
+      <!-- IMAGE: Dorry et Brogy -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/a/a6/Dorry_and_Brogy_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142533" alt="Dorry et Brogy" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Dorry et Brogy, les guerriers géants d'Elbaf, en duel depuis un siècle.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🧑‍🤝‍🧑 Personnages</h4>
+          <ul>
+            <li><strong>Vivi</strong> risque sa vie seule, depuis 2 ans, pour sauver son pays de l'intérieur.</li>
+            <li><strong>Dorry &amp; Brogy</strong>, géants d'Elbaf : premier aperçu de cette nation légendaire — et de son sens de l'honneur martial, thème qui explosera ~1000 chapitres plus tard.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="reflect">
+        <span class="tag">💭 Réflexion — la promesse à long terme</span>
+        Oda plante ici, dès 2000, la graine d'Elbaf : Luffy et Usopp jurent d'y aller un jour. Il faudra plus de 1100 chapitres et 24 ans de publication réelle pour que cette promesse soit tenue. Peu d'œuvres tiennent un fil narratif aussi longtemps sans le trahir.
+      </div>
+    </div>
+  </details>
+
+  <details class="arc" open>
+    <summary>Drum Island <span class="arc-range">ch. 136–154</span></summary>
+    <div class="arc-body">
+      <p>Tony Tony Chopper, renne ayant mangé le Fruit de l'Humain, rejoint l'équipage comme médecin. Son mentor, le Dr. Kureha, et son passé de rejet (ni accepté par les rennes, ni par les humains) en font l'un des personnages les plus tragiques de la série avant même son entrée en scène.</p>
+
+      <!-- IMAGE: Chopper -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/e/e7/Tony_Tony_Chopper_Anime_Post_Timeskip_Infobox.png/revision/latest/scale-to-width-down/500?cb=20210916180833" alt="Tony Tony Chopper" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Tony Tony Chopper, le médecin de l'équipage, en forme hybride.</div>
+      </div>
+    </div>
+  </details>
+
+  <details class="arc" open>
+    <summary>Alabasta <span class="arc-range">ch. 155–217</span></summary>
+    <div class="arc-body">
+      <p>« Mr. 0 » se révèle être <strong>Sir Crocodile</strong>, l'un des <strong>Sept Grands Corsaires</strong> (Ōka Shichibukai) — des pirates puissants, légalisés et armés par le Gouvernement Mondial en échange d'un service occasionnel. Crocodile manipule Alabasta depuis des années pour y déclencher une guerre civile et fouiller librement le désert à la recherche de <strong>Pluton</strong>, une arme antique capable de raser des îles. Luffy le bat en duel final ; la guerre civile est stoppée à la toute dernière minute.</p>
+
+      <!-- IMAGE: Crocodile -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/3/3b/Sir_Crocodile_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142701" alt="Sir Crocodile" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Sir Crocodile, ancien Grand Corsaire et premier véritable ennemi de Luffy dans la Grand Line.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🏛️ Gouvernement Mondial &amp; secrets</h4>
+          <ul>
+            <li>Premier aperçu du système des <strong>Sept Grands Corsaires</strong> : des criminels que l'État arme légalement — un choix cynique de « diviser pour régner » qui sera aboli bien plus tard, à la Reverie.</li>
+            <li>Première mention explicite d'une <strong>Arme Antique</strong>, Pluton — un vaisseau de guerre capable de détruire un pays à lui seul.</li>
+            <li>Nico Robin (alliée temporaire de Crocodile) est en réalité une chasseuse de Ponéglyphes recherchée depuis l'enfance : elle est l'unique survivante du massacre d'<strong>Ohara</strong>, une île rasée par la Marine 22 ans plus tôt pour avoir étudié l'Histoire interdite.</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>🧑‍🤝‍🧑 Apparitions clés</h4>
+          <ul>
+            <li><strong>Portgas D. Ace</strong>, commandant de la 2ᵉ division de l'équipage de Barbe Blanche, débarque en chassant Barbe Noire — sans savoir que son petit frère juré est juste devant lui.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="event">
+        <h4>⚡ Événement majeur — le système des Corsaires mis en lumière</h4>
+        <p>Le Gouvernement Mondial préfère armer des criminels plutôt que de renforcer sa propre Marine partout à la fois. Crocodile a pu comploter pendant des années en toute impunité grâce à ce statut.</p>
+        <div class="impact"><strong>Portée :</strong> ce n'est pas un simple élément de worldbuilding — c'est la première preuve concrète que le Gouvernement Mondial n'est pas un arbitre neutre de la justice, mais une structure de pouvoir prête à sacrifier des royaumes entiers pour sa propre stabilité. Vivi refusera d'ailleurs de devenir pirate malgré son admiration pour Luffy : elle choisit de rester à l'intérieur du système pour le changer, posant très tôt une tension politique centrale de la série (réforme de l'intérieur vs. rupture révolutionnaire).</div>
+      </div>
+      <div class="reflect">
+        <span class="tag">💭 Réflexion — réformer ou renverser ?</span>
+        Vivi et, plus tard, Sabo (son ancien ami d'enfance devenu révolutionnaire) incarnent les deux réponses possibles à l'injustice du Gouvernement Mondial : rester à l'intérieur du système pour le changer point par point, ou le combattre frontalement de l'extérieur. One Piece ne tranche jamais vraiment laquelle des deux voies est « la bonne » — les deux personnages se respectent et s'admirent mutuellement.
+      </div>
+    </div>
+  </details>
+</section>
+</div>
+
+<div class="wrap">
+<section class="saga" id="saga-skypiea">
+  <div class="saga-head">
+    <div class="saga-seal">3</div>
+    <h3>Skypiea — l'or d'un dieu déchu</h3>
+    <div class="saga-meta">Ch. 218–302</div>
+  </div>
+  <p class="saga-intro">Une île volante, un « dieu » tyrannique, et le deuxième Ponéglyphe de la série : cette saga semble être une parenthèse fantastique isolée, mais elle installe en réalité deux piliers du lore final — l'existence documentée de l'Histoire Interdite, et un premier visage de Barbe Noire.</p>
+
+  <!-- IMAGE: Enel -->
+  <div class="img-block">
+    <img src="https://static.wikia.nocookie.net/onepiece/images/9/9e/Enel_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142601" alt="Enel" loading="lazy" style="max-height:300px;">
+    <div class="img-caption">Enel, le dieu autoproclamé de Skypiea, maître du fruit de la foudre.</div>
+  </div>
+
+  <details class="arc" open>
+    <summary>Jaya <span class="arc-range">ch. 218–236</span></summary>
+    <div class="arc-body">
+      <p>Escale houleuse où l'équipage croise Bellamy « l'Hyène », un pirate qui méprise ouvertement les rêves (il tourne Luffy en ridicule pour vouloir atteindre le « pays du ciel »). Dans l'ombre, un pirate obèse et mystérieux nommé <strong>Marshall D. Teach</strong> observe la scène.</p>
+
+      <!-- IMAGE: Barbe Noire -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/6/63/Marshall_D._Teach_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142732" alt="Marshall D. Teach - Barbe Noire" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Marshall D. Teach, alias Barbe Noire, encore inconnu à ce stade du récit.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🧑‍🤝‍🧑 Personnages</h4>
+          <p>Première apparition de <strong>Barbe Noire</strong> — encore un second couteau anonyme à ce stade. Rien n'indique qu'il deviendra, quelques dizaines de chapitres plus tard, l'un des antagonistes majeurs de toute la série.</p>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="arc" open>
+    <summary>Skypiea <span class="arc-range">ch. 237–302</span></summary>
+    <div class="arc-body">
+      <p>Sur l'île céleste de Skypiea, <strong>Ener</strong> (Enel), utilisateur du fruit Logia de la foudre, se prend pour un dieu et opprime les Shandia, un peuple déchu de son propre territoire (Shandora, la « cité d'or », engloutie dans les nuages). Luffy, immunisé à l'électricité de par sa nature en caoutchouc, bat Enel — qui s'enfuit vers la Lune dans une fusée ancienne, laissant entrevoir une civilisation extraterrestre parallèle qui ne sera quasiment plus jamais évoquée avant très tard dans la série.</p>
+
+      <!-- IMAGE: La cloche de Shandora -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/8/8e/Shandora_Golden_Bell.png/revision/latest/scale-to-width-down/500?cb=20230922142749" alt="La cloche d'or de Shandora" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">La cloche d'or de Shandora, la « Voix de Toutes Choses », que Luffy entend résonner.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🌍 Secrets du monde</h4>
+          <ul>
+            <li>Le <strong>deuxième Ponéglyphe</strong> de la saga est trouvé et lu par Robin : il ne raconte pas encore le Siècle Vide en détail, mais confirme que ces pierres, disséminées dans le monde, portent une Histoire que le Gouvernement a activement effacée des livres officiels.</li>
+            <li>La légende de la cloche de Shandora, « la Voix de Toutes Choses », que seuls certains individus peuvent entendre — Luffy en fait partie, un indice discret sur sa nature liée à Joy Boy, qui ne sera compris que 800 chapitres plus tard.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="reflect">
+        <span class="tag">💭 Réflexion — la religion comme outil de pouvoir</span>
+        Enel dirige Skypiea via une théocratie de la peur : il se fait passer pour un dieu et punit le doute par la mort. C'est le premier vrai « tyran » de la série qui n'a pas de lien direct avec le Gouvernement Mondial — Oda montre que l'oppression n'est pas l'apanage d'une seule structure, elle peut être réinventée localement à chaque échelle du pouvoir.
+      </div>
+    </div>
+  </details>
+</section>
+</div>
+
+<div class="wrap">
+<section class="saga" id="saga-water7">
+  <div class="saga-head">
+    <div class="saga-seal">4</div>
+    <h3>Water 7 — trahison, famille choisie, guerre déclarée</h3>
+    <div class="saga-meta">Ch. 303–441</div>
+  </div>
+  <p class="saga-intro">Considérée par une large partie du fandom comme le sommet de la première moitié de la série. Ce n'est plus un royaume qu'on sauve de l'extérieur : c'est l'équipage lui-même qui manque d'imploser, avant de déclarer, très concrètement, la guerre au Gouvernement Mondial.</p>
+
+  <!-- IMAGE: Franky -->
+  <div class="img-block">
+    <img src="https://static.wikia.nocookie.net/onepiece/images/0/05/Franky_Anime_Post_Timeskip_Infobox.png/revision/latest/scale-to-width-down/500?cb=20210916180800" alt="Franky" loading="lazy" style="max-height:300px;">
+    <div class="img-caption">Franky, le charpentier cyborg de l'équipage, constructeur du Thousand Sunny.</div>
+  </div>
+
+  <details class="arc" open>
+    <summary>Water 7 <span class="arc-range">ch. 306–355</span></summary>
+    <div class="arc-body">
+      <p>Dans la cité aquatique de Water 7, l'équipage cherche un charpentier pour réparer le Merry, à bout de souffle. Nico Robin est manipulée en secret par le <strong>CP9</strong>, la branche d'assassins-espions la plus secrète du <strong>Cipher Pol</strong> (les services de renseignement directement rattachés au Gouvernement Mondial), infiltrée parmi les dirigeants du chantier naval. Elle « trahit » apparemment l'équipage pour se rendre, seule, aux autorités.</p>
+
+      <!-- IMAGE: Water 7 -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/f/fb/Water_7_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142738" alt="Water 7" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Water 7, la cité aquatique, théâtre de la trahison et de la reconstruction de l'équipage.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🏛️ Gouvernement Mondial</h4>
+          <p>Premier aperçu concret du <strong>Cipher Pol</strong> : un réseau d'espionnage à plusieurs échelons (CP1 à CP9), agissant sous couverture, au-dessus des lois locales, rattaché directement au sommet de l'État.</p>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="arc" open>
+    <summary>Enies Lobby <span class="arc-range">ch. 356–401</span></summary>
+    <div class="arc-body">
+      <p>L'équipage entier prend d'assaut Enies Lobby, place forte judiciaire du Gouvernement Mondial, pour récupérer Robin de force. On y apprend enfin son passé : seule survivante du massacre d'<strong>Ohara</strong>, une île de chercheurs rasée par un <strong>Buster Call</strong> (bombardement naval total, ordonné pour effacer toute trace d'une bibliothèque étudiant le Siècle Vide). Robin a fui seule pendant 20 ans, considérée comme une menace à abattre à vue dès l'âge de 8 ans, jusqu'à ce que Luffy déclare vouloir la garder dans son équipage sans condition.</p>
+
+      <!-- IMAGE: Drapeau du Gouvernement Mondial brûlé -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/3/39/Enies_Lobby_Flag_Burning.png/revision/latest/scale-to-width-down/500?cb=20230922142617" alt="Le drapeau du Gouvernement Mondial brûlé" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Le drapeau du Gouvernement Mondial brûlé — Luffy déclare la guerre au monde.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🌍 Secrets du monde</h4>
+          <ul>
+            <li>Le <strong>Buster Call</strong> : une frappe de plusieurs escadres de Marine + un Amiral, déclenchée sur simple ordre pour rayer une île de la carte. Utilisé une première fois sur Ohara pour empêcher la diffusion du contenu des Ponéglyphes.</li>
+            <li>Étudier le Siècle Vide est un crime passible de mort immédiate, sans procès — la plus grande peur du Gouvernement Mondial est que l'Histoire réelle soit un jour reconstituée.</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>🧑‍🤝‍🧑 Personnages</h4>
+          <p>Le jeune Amiral en devenir <strong>Kuzan (Aokiji)</strong> avait reçu l'ordre d'exécuter Robin enfant — il a choisi de la laisser fuir. Premier signe que même au sein de la Marine, l'obéissance n'est pas unanime.</p>
+        </div>
+      </div>
+      <div class="event">
+        <h4>⚡ Événement majeur — déclarer la guerre au monde</h4>
+        <p>Pour intimider l'équipage, le chef du CP9 rappelle qu'attaquer le drapeau du Gouvernement Mondial équivaut à lui déclarer la guerre. Luffy déchire le drapeau sans hésiter.</p>
+        <div class="impact"><strong>Portée :</strong> ce geste, en apparence symbolique, est le premier acte authentiquement révolutionnaire de Luffy contre l'institution elle-même — pas contre un simple sous-fifre local. C'est la bascule qui fait de lui, aux yeux du monde, un danger politique et pas seulement un criminel de plus.</div>
+      </div>
+      <div class="reflect">
+        <span class="tag">💭 Réflexion — qui a le droit d'écrire l'Histoire ?</span>
+        Le sort d'Ohara pose une question centrale à toute la série : un savoir devient-il dangereux parce qu'il est vrai, ou seulement parce qu'il menace ceux qui profitent du mensonge officiel ? Le Gouvernement Mondial ne prétend jamais que les Ponéglyphes mentent — il empêche simplement qu'on les lise.
+      </div>
+    </div>
+  </details>
+
+  <details class="arc" open>
+    <summary>Post-Enies Lobby &amp; le Rocketman <span class="arc-range">ch. 402–421</span></summary>
+    <div class="arc-body">
+      <p>Adieux funèbres au Merry (le bateau, littéralement vivant à sa manière, choisit lui-même le moment de son dernier voyage). Franky, ex-charpentier, rejoint officiellement l'équipage et construit le <strong>Thousand Sunny</strong>. La nouvelle tombe : <strong>Portgas D. Ace</strong> a été capturé par un Amiral et sera exécuté publiquement à Marineford.</p>
+      <div class="event">
+        <h4>⚡ Événement majeur — la capture d'Ace</h4>
+        <p>Ace, fils de Gol D. Roger, est capturé après avoir échoué à venger la mort de son ami Thatch, tué par Barbe Noire.</p>
+        <div class="impact"><strong>Portée :</strong> le Gouvernement Mondial prépare une exécution publique pour attirer Barbe Blanche lui-même hors de son territoire — un piège à l'échelle d'un Empereur, qui va déclencher la plus grande bataille de la première moitié de la série.</div>
+      </div>
+    </div>
+  </details>
+</section>
+</div>
+
+<div class="wrap">
+<section class="saga" id="saga-thriller">
+  <div class="saga-head">
+    <div class="saga-seal">5</div>
+    <h3>Thriller Bark — l'île des ombres volées</h3>
+    <div class="saga-meta">Ch. 442–489</div>
+  </div>
+  <p class="saga-intro">Un intermède d'horreur gothique qui cache deux moments parmi les plus marquants de la série : le sacrifice silencieux de Zoro, et la première apparition — énigmatique — de Bartholomew Kuma, dont les véritables motivations ne seront comprises que quinze ans de publication plus tard.</p>
+
+  <!-- IMAGE: Brook -->
+  <div class="img-block">
+    <img src="https://static.wikia.nocookie.net/onepiece/images/b/b5/Brook_Anime_Post_Timeskip_Infobox.png/revision/latest/scale-to-width-down/500?cb=20210916180754" alt="Brook" loading="lazy" style="max-height:300px;">
+    <div class="img-caption">Brook, le squelette musicien de l'équipage, survivant solitaire depuis 50 ans.</div>
+  </div>
+
+  <details class="arc" open>
+    <summary>Thriller Bark <span class="arc-range">ch. 442–489</span></summary>
+    <div class="arc-body">
+      <p>Gecko Moria, un autre des Sept Grands Corsaires, vole les ombres des vivants pour créer une armée de zombies, dont un « Zombie Général » constitué de l'ombre d'Oz, un géant. Après une bataille acharnée, Luffy manque de mourir empoisonné ; Zoro négocie avec l'infirmière du navire de transférer toute la douleur de Luffy sur lui-même, encaissant des dégâts qui devraient être fatals, sans jamais rien laisser paraître à son capitaine.</p>
+      <p>Brook, squelette musicien, rejoint l'équipage : mort depuis 50 ans grâce à son Fruit du Démon (Yomi Yomi no Mi, qui ramène l'âme), il a erré <em>seul</em> pendant des décennies après que son équipage entier a péri, piégé dans le Triangle Florian où le temps s'écoule différemment.</p>
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🧑‍🤝‍🧑 Personnages clés</h4>
+          <ul>
+            <li><strong>Bartholomew Kuma</strong> apparaît pour observer le combat pour le compte du Gouvernement — et épargne étrangement l'équipage, sans explication. Ce mystère ne sera résolu que dans l'arc Egghead.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="reflect">
+        <span class="tag">💭 Réflexion — la douleur qu'on choisit de porter seul</span>
+        La scène où Zoro dit « rien ne s'est passé » après avoir absorbé une douleur presque mortelle est devenue un symbole culturel de la série entière : le véritable premier lieutenant n'est pas celui qui est le plus fort visiblement, mais celui prêt à disparaître pour que le capitaine puisse continuer d'avancer.
+      </div>
+    </div>
+  </details>
+</section>
+</div>
+
+<div class="wrap">
+<section class="saga" id="saga-summit">
+  <div class="saga-head">
+    <div class="saga-seal">6</div>
+    <h3>La Guerre au Sommet — la fin d'une ère</h3>
+    <div class="saga-meta">Ch. 490–580 · Le tournant émotionnel et politique de toute la série</div>
+  </div>
+  <p class="saga-intro">Sabaody, Amazon Lily, Impel Down puis Marineford : quatre arcs qui, ensemble, transforment Luffy d'aventurier fougueux en symbole politique malgré lui, tuent l'un des personnages les plus aimés de la série, et referment brutalement la première moitié de l'histoire.</p>
+
+  <!-- IMAGE: Portgas D. Ace -->
+  <div class="img-block">
+    <img src="https://static.wikia.nocookie.net/onepiece/images/c/cf/Portgas_D._Ace_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142652" alt="Portgas D. Ace" loading="lazy" style="max-height:300px;">
+    <div class="img-caption">Portgas D. Ace, le frère juré de Luffy, dont la capture déclenche la guerre au sommet.</div>
+  </div>
+
+  <details class="arc" open>
+    <summary>Sabaody Archipelago <span class="arc-range">ch. 490–514</span></summary>
+    <div class="arc-body">
+      <p>L'équipage croise la route des dix autres membres de la « <strong>pire génération</strong> » (Worst Generation) : Law, Kid, Killer, Hawkins, Bonney, Drake, Apoo, Urouge, Bege… tous des primes énormes qui vont redessiner le Nouveau Monde. Sabaody abrite aussi un marché aux esclaves humains où sont vendus des Hommes-Poissons et des humains devant des <strong>Dragons Célestes</strong> — les descendants directs des 20 rois fondateurs du Gouvernement Mondial, intouchables par la loi, qui traitent le reste de l'humanité comme du bétail.</p>
+
+      <!-- IMAGE: Silvers Rayleigh -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/e/e2/Silvers_Rayleigh_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142713" alt="Silvers Rayleigh" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Silvers Rayleigh, le « Roi Noir », ancien bras droit de Gol D. Roger, qui entraînera Luffy.</div>
+      </div>
+
+      <div class="event">
+        <h4>⚡ Événement majeur — Luffy frappe un Dragon Céleste</h4>
+        <p>Luffy assomme publiquement Charlos, un Dragon Céleste, pour protéger Hachi et Camie. C'est un acte quasiment sacrilège aux yeux du monde : personne ne touche un Noble Mondial impunément.</p>
+        <div class="impact"><strong>Portée :</strong> un Amiral en personne (Kizaru) est immédiatement dépêché. Ce geste confirme au sommet de l'État que Luffy n'est plus un simple pirate à ignorer — il devient, à ce moment précis, une cible prioritaire.</div>
+      </div>
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🧑‍🤝‍🧑 Personnages</h4>
+          <p>Bartholomew Kuma disperse l'équipage entier aux quatre coins du monde d'un revers de la main — un acte qui ressemble à une attaque, mais qui les sauve en réalité d'une mort certaine face à un Amiral. Le vrai sens de ce geste ne sera révélé que bien plus tard.</p>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="arc" open>
+    <summary>Amazon Lily <span class="arc-range">ch. 515–524</span></summary>
+    <div class="arc-body">
+      <p>Luffy se réveille sur l'île exclusivement féminine des Kuja, dirigée par Boa Hancock, Corsaire et « femme la plus belle du monde ». On apprend que Hancock et ses sœurs portent une marque d'esclave, héritage d'un passé où elles ont été libérées par <strong>Fisher Tiger</strong>, un homme-poisson qui a un jour attaqué seul Mary Geoise pour libérer des esclaves.</p>
+
+      <!-- IMAGE: Boa Hancock -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/5/5b/Boa_Hancock_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142545" alt="Boa Hancock" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Boa Hancock, l'Impératrice des Kuja, l'une des Sept Grands Corsaires.</div>
+      </div>
+    </div>
+  </details>
+
+  <details class="arc" open>
+    <summary>Impel Down <span class="arc-range">ch. 525–549</span></summary>
+    <div class="arc-body">
+      <p>Luffy s'infiltre seul dans la prison la plus sécurisée du monde pour tenter de sauver Ace, recrutant au passage des alliés improbables (Buggy, Mr. 3, Bentham/Bon Clay, Jinbe) et croisant Ivankov, cadre de l'Armée Révolutionnaire. Bentham sacrifie ses chances de survie pour permettre l'évasion de Luffy.</p>
+
+      <!-- IMAGE: Impel Down -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/b/b6/Impel_Down_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142637" alt="Impel Down" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Impel Down, la prison la plus sécurisée du monde, où Luffy s'infiltre pour sauver Ace.</div>
+      </div>
+    </div>
+  </details>
+
+  <details class="arc" open>
+    <summary>Marineford <span class="arc-range">ch. 550–580</span></summary>
+    <div class="arc-body">
+      <p>Le Gouvernement Mondial organise l'exécution publique d'Ace pour attirer Barbe Blanche à découvert. La bataille mobilise trois Amiraux, tous les Corsaires disponibles, la flotte entière de Barbe Blanche, les évadés d'Impel Down et Luffy. Ace meurt en protégeant Luffy d'une attaque au magma d'Akainu. Barbe Blanche, mortellement blessé, se bat encore debout et hurle à la face du monde entier, retransmis en direct : le One Piece existe réellement. Il meurt sur le champ de bataille, marquant la fin symbolique d'une génération entière de puissance.</p>
+
+      <!-- IMAGE: Barbe Blanche -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/5/54/Edward_Newgate_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142614" alt="Edward Newgate - Barbe Blanche" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Edward Newgate, alias Barbe Blanche, l'Empereur qui meurt debout à Marineford.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🏛️ Gouvernement Mondial</h4>
+          <p>Le Fleet Amiral Sengoku révèle publiquement, en pleine bataille, que Luffy est le fils de <strong>Monkey D. Dragon</strong>, chef de l'Armée Révolutionnaire — l'ennemi juré n°1 du Gouvernement Mondial. Ce n'est ni un hasard ni une bavure : c'est une tentative délibérée de retourner Garp et les autres Marines contre lui.</p>
+        </div>
+        <div class="info-box">
+          <h4>🧑‍🤝‍🧑 Personnages</h4>
+          <p>Barbe Noire profite du chaos pour voler le Fruit du Démon Tremblement-Tremblement (Gura Gura no Mi) sur le corps de Barbe Blanche, cumulant deux pouvoirs — un exploit jusque-là jugé impossible.</p>
+        </div>
+      </div>
+      <div class="reflect">
+        <span class="tag">💭 Réflexion — une mort retransmise en direct devient une arme politique... contre son commanditaire</span>
+        Le Gouvernement voulait utiliser l'exécution d'Ace comme démonstration de force. Barbe Blanche retourne l'exercice : sa dernière phrase, diffusée partout, confirme au monde entier que le trésor de Roger existe. L'État, en voulant écraser un symbole, en a créé un autre, bien plus puissant — la preuve que le Gouvernement Mondial peine à contrôler le récit qu'il diffuse lui-même.
+      </div>
+    </div>
+  </details>
+
+  <details class="arc" open>
+    <summary>Après-guerre &amp; Ellipse de deux ans <span class="arc-range">ch. 581–597</span></summary>
+    <div class="arc-body">
+      <p>Luffy s'effondre psychologiquement à Amazon Lily, incapable d'accepter la mort d'Ace, jusqu'à un cri de deuil déchirant. Rayleigh, ancien bras droit de Roger, propose d'entraîner Luffy. L'équipage entier se sépare volontairement pendant <strong>deux ans</strong> pour s'entraîner individuellement, avec pour seul rendez-vous : se retrouver à Sabaody.</p>
+      <div class="event">
+        <h4>⚡ Événement majeur — l'ellipse de deux ans</h4>
+        <p>Chaque membre de l'équipage devient significativement plus fort : Zoro s'entraîne avec Mihawk, Sanji au Kamabakka Kingdom (malgré lui), Robin et Nico se renforcent en autonomie, Chopper étudie la médecine, Usopp s'entraîne avec les Bonshommes de Neige géants, Franky améliore son corps cyborg, Brook cherche l'équipage de Barbe Blanche.</p>
+        <div class="impact"><strong>Portée :</strong> ce choix structurel — geler la narration deux ans « hors-champ » — permet à la série de basculer directement dans le Nouveau Monde avec un équipage crédible face aux Empereurs, sans des centaines de chapitres d'entraînement filler.</div>
+      </div>
+    </div>
+  </details>
+</section>
+</div>
+
+<div class="wrap">
+<section class="saga" id="saga-fishman">
+  <div class="saga-head">
+    <div class="saga-seal">7</div>
+    <h3>Fishman Island — racisme, deuil et Poséidon</h3>
+    <div class="saga-meta">Ch. 597–653 · Première escale du Nouveau Monde</div>
+  </div>
+  <p class="saga-intro">L'équipage reformé plonge sous les mers, jusqu'au royaume des Hommes-Poissons et des sirènes — où le racisme entrevu chez Arlong, 500 chapitres plus tôt, reçoit enfin tout son contexte historique.</p>
+
+  <!-- IMAGE: Jinbe -->
+  <div class="img-block">
+    <img src="https://static.wikia.nocookie.net/onepiece/images/f/f2/Jinbe_Anime_Post_Timeskip_Infobox.png/revision/latest/scale-to-width-down/500?cb=20210916180812" alt="Jinbe" loading="lazy" style="max-height:300px;">
+    <div class="img-caption">Jinbe, le timonier de l'équipage, ancien Grand Corsaire et roi des Hommes-Poissons.</div>
+  </div>
+
+  <details class="arc" open>
+    <summary>Fishman Island <span class="arc-range">ch. 597–653</span></summary>
+    <div class="arc-body">
+      <p>Le royaume vit sous la menace des Nouveaux Pirates Hommes-Poissons d'Hody Jones, qui veulent renverser le roi Neptune et exterminer les humains par vengeance historique. On apprend le destin de la reine Otohime, tuée accidentellement alors qu'elle tentait justement de réconcilier les deux peuples en récoltant des millions de signatures pour l'égalité. Shirahoshi, princesse-sirène géante, se révèle être la <strong>Poséidon</strong> vivante — capable de commander les Rois des Mers, la deuxième Arme Antique identifiée dans la série.</p>
+
+      <!-- IMAGE: Shirahoshi -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/5/58/Shirahoshi_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142738" alt="Shirahoshi" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Shirahoshi, la princesse-sirène géante, incarnation vivante de Poséidon.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🌍 Secrets du monde</h4>
+          <ul>
+            <li><strong>Poséidon n'est pas un objet</strong>, contrairement à Pluton : c'est une capacité qui se transmet dans une lignée royale de sirènes.</li>
+            <li>Fishman Island vit sous la protection payante de Big Mom, un Empereur : premier aperçu concret de ce que signifie être un territoire sous tribut.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="reflect">
+        <span class="tag">💭 Réflexion — le pardon a-t-il un coût acceptable ?</span>
+        Otohime meurt pour une cause juste sans voir son aboutissement ; sa mort est récupérée par les extrémistes des deux camps pour justifier encore plus de haine. Oda esquisse ici une idée dure : la réconciliation entre peuples ne se gagne jamais par un seul acte héroïque, mais par des générations de patience — et le risque d'échec, ou de récupération violente, est réel à chaque étape.
+      </div>
+    </div>
+  </details>
+</section>
+</div>
+
+<div class="wrap">
+<section class="saga" id="saga-dressrosa">
+  <div class="saga-head">
+    <div class="saga-seal">8</div>
+    <h3>Punk Hazard &amp; Dressrosa — la chute d'un roi-tyran</h3>
+    <div class="saga-meta">Ch. 654–801 · La plus longue saga de la première moitié</div>
+  </div>
+  <p class="saga-intro">Deux arcs qui, mis bout à bout, révèlent l'ampleur du marché noir d'armes qui alimente les Empereurs, et détruisent un système de pouvoir vieux de dix ans sur une seule île.</p>
+
+  <!-- IMAGE: Trafalgar Law -->
+  <div class="img-block">
+    <img src="https://static.wikia.nocookie.net/onepiece/images/3/3f/Trafalgar_Law_Anime_Post_Timeskip_Infobox.png/revision/latest/scale-to-width-down/500?cb=20210916180835" alt="Trafalgar Law" loading="lazy" style="max-height:300px;">
+    <div class="img-caption">Trafalgar Law, le « Chirurgien de la Mort », allié de Luffy contre Doflamingo et Kaido.</div>
+  </div>
+
+  <details class="arc" open>
+    <summary>Punk Hazard <span class="arc-range">ch. 654–699</span></summary>
+    <div class="arc-body">
+      <p>Sur une île ravagée par une expérience toxique, Caesar Clown — ancien collaborateur de Vegapunk reconverti en savant fou au service de Kaido — mène des expériences illégales sur des enfants, les transformant en géants dépendants d'une drogue. Trafalgar Law, chirurgien-pirate et Corsaire, s'allie temporairement avec Luffy pour capturer Caesar, monnaie d'échange contre Donquixote Doflamingo, autre Corsaire.</p>
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🧑‍🤝‍🧑 Personnages</h4>
+          <p>Premières apparitions de Kin'emon et du jeune Momonosuke, samouraïs venus du Pays de Wano — un royaume fermé sur lui-même, encore un nom lointain à ce stade.</p>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="arc" open>
+    <summary>Dressrosa <span class="arc-range">ch. 700–801</span></summary>
+    <div class="arc-body">
+      <p>Doflamingo régnait en tyran depuis 10 ans sur Dressrosa, transformant en jouets vivants les habitants qui s'opposaient à lui, tout en dirigeant secrètement le plus gros trafic d'armes du Nouveau Monde : il fournit à Kaido les <strong>SMILEs</strong>, des fruits du démon artificiels et instables produits en usine. On y apprend aussi que Doflamingo est né Dragon Céleste — sa famille a renoncé volontairement à son statut de Noble Mondial, ce qui a fait d'eux des parias haïs à la fois par les nobles et par le peuple, traumatisme fondateur de sa cruauté.</p>
+      <p>Le passé de Law est également révélé : natif de Flevance, la « Cité Blanche », un royaume rayé de la carte par une épidémie liée à un minerai précieux (le Plomb d'Ambre) — le Gouvernement Mondial a sciemment laissé le pays s'effondrer pour ne pas perdre l'accès à la ressource, jusqu'à en effacer jusqu'au nom sur les cartes.</p>
+
+      <!-- IMAGE: Doflamingo -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/f/f0/Donquixote_Doflamingo_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142551" alt="Donquixote Doflamingo" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Donquixote Doflamingo, ancien Dragon Céleste devenu le tyran de Dressrosa.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🌍 Secrets du monde</h4>
+          <ul>
+            <li>Les <strong>Corsaires</strong> ne se contentent pas d'un service occasionnel : certains, comme Doflamingo, dirigent un empire criminel parallèle sous couvert de statut légal — la preuve ultime que le système est un pacte cynique, pas un outil de justice.</li>
+            <li>Flevance confirme un motif récurrent : le Gouvernement Mondial sacrifie des populations entières lorsque cela sert ses intérêts économiques ou sécuritaires (Ohara pour le savoir, Flevance pour le minerai).</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>🧑‍🤝‍🧑 Personnages</h4>
+          <p>Sabo, révélé vivant après avoir survécu à l'explosion qui a « tué » l'enfant Sabo dans son enfance (racontée bien avant), mange le fruit du feu (Mera Mera no Mi) de son défunt frère Ace, refermant un cercle familial déchirant.</p>
+        </div>
+      </div>
+      <div class="event">
+        <h4>⚡ Événement majeur — la chute de Doflamingo</h4>
+        <p>L'alliance Luffy-Law, avec l'aide de Kyros, Rebecca et de l'ancien roi Riku, met fin au règne de Doflamingo ; l'Amiral Fujitora et l'Armée Révolutionnaire (Sabo) profitent du chaos pour l'arrêter officiellement.</p>
+        <div class="impact"><strong>Portée :</strong> en tombant, Doflamingo coupe l'approvisionnement en SMILEs de Kaido — un choix scénaristique qui prépare directement l'affaiblissement politique de Kaido avant même le début de l'arc Wano.</div>
+      </div>
+      <div class="reflect">
+        <span class="tag">💭 Réflexion — la légalité n'est pas la légitimité</span>
+        Dressrosa referme la boucle ouverte par Alabasta : le statut de Corsaire n'a jamais été un gage de moralité, seulement une immunité achetée. Le récit prépare ici, sans le dire explicitement, l'abolition du système qui aura lieu quelques centaines de chapitres plus tard, à la Reverie.
+      </div>
+    </div>
+  </details>
+</section>
+</div>
+
+<div class="wrap">
+<section class="saga" id="saga-zou">
+  <div class="saga-head">
+    <div class="saga-seal">9</div>
+    <h3>Zou, Whole Cake Island &amp; la Reverie</h3>
+    <div class="saga-meta">Ch. 802–908 · Alliances, familles toxiques, et le plus grand secret du monde enfin entr'aperçu</div>
+  </div>
+  <p class="saga-intro">Trois arcs qui préparent Wano tout en posant, discrètement au départ puis frontalement à la toute fin, la révélation qui va reconfigurer toute la compréhension du lecteur sur qui dirige vraiment le monde.</p>
+
+  <!-- IMAGE: Zou et l'éléphant géant -->
+  <div class="img-block">
+    <img src="https://static.wikia.nocookie.net/onepiece/images/8/81/Zou_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142746" alt="Zou" loading="lazy" style="max-height:300px;">
+    <div class="img-caption">Zou, l'île sur le dos de l'éléphant géant Zunisha, patrie des Minks.</div>
+  </div>
+
+  <details class="arc" open>
+    <summary>Zou <span class="arc-range">ch. 802–824</span></summary>
+    <div class="arc-body">
+      <p>Île posée sur le dos d'un éléphant géant vivant depuis des siècles, Zou abrite le peuple Mink. L'équipage y croise les fidèles survivants du Pays de Wano (Kin'emon, Kiku, Nekomamushi, Inuarashi…), en quête de guerriers pour renverser Kaido, qui occupe leur pays depuis 20 ans. Premiers indices sur Kozuki Oden, ancien seigneur de Wano exécuté par Kaido et Orochi.</p>
+      <div class="event">
+        <h4>⚡ Événement majeur — l'Alliance des Pirates</h4>
+        <p>Straw Hats, Heart Pirates (Law), Mink Tribe et fidèles de Wano scellent une alliance formelle pour renverser Kaido — la plus grande coalition de pirates jamais formée dans la série jusque-là.</p>
+      </div>
+    </div>
+  </details>
+
+  <details class="arc" open>
+    <summary>Whole Cake Island <span class="arc-range">ch. 825–902</span></summary>
+    <div class="arc-body">
+      <p>Sanji est rappelé de force dans sa famille biologique, la <strong>Vinsmoke / Germa 66</strong>, un royaume militarisé où son père Judge a génétiquement modifié ses frères et sœurs pour supprimer douleur et émotions. Sanji, jugé « raté » car resté humain (sa mère Sora a sacrifié sa santé pour cela), est marié de force à Charlotte Pudding pour sceller une alliance entre Germa 66 et Big Mom — que cette dernière compte en réalité trahir en exterminant tout le monde à la noce pour récupérer à la fois l'armée Germa et la technologie Vinsmoke.</p>
+      <p>Le passé de Big Mom se dévoile en fragments terribles : enfant surpuissante et incontrôlable, elle aurait involontairement causé la mort de Mère Carmel, sa tutrice d'orphelinat, dans un accès de rage — un traumatisme fondateur enterré sous des montagnes de sucreries et de démesure.</p>
+
+      <!-- IMAGE: Big Mom -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/d/db/Big_Mom_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142548" alt="Charlotte Linlin - Big Mom" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Charlotte Linlin, alias Big Mom, l'un des quatre Empereurs, maîtresse de Whole Cake Island.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🧑‍🤝‍🧑 Personnages</h4>
+          <ul>
+            <li><strong>Jinbe</strong>, ex-Corsaire et ex-Pirate du Soleil, rejoint enfin officiellement l'équipage comme timonier.</li>
+            <li><strong>Katakuri</strong>, l'un des fils les plus puissants de Big Mom, offre à Luffy son combat le plus dur jusqu'ici — et gagne son respect en retour.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="reflect">
+        <span class="tag">💭 Réflexion — la famille comme outil géopolitique</span>
+        La famille Charlotte n'est pas une famille au sens affectif : c'est une machine à alliances, chaque enfant étant marié stratégiquement à un royaume ou une organisation différente. Oda pousse ici à l'extrême une logique déjà présente chez les Vinsmoke : la famille biologique peut être la structure de pouvoir la plus froide de toutes, quand elle est instrumentalisée jusqu'au bout.
+      </div>
+    </div>
+  </details>
+
+  <details class="arc" open>
+    <summary>La Reverie (Levely) <span class="arc-range">ch. 892–908</span></summary>
+    <div class="arc-body">
+      <p>Tous les quatre ans, les dirigeants des royaumes membres du Gouvernement Mondial se réunissent à Mary Geoise, la cité sainte au sommet du Red Line où vivent les Dragons Célestes. Cobra (roi d'Alabasta) et le roi Riku (Dressrosa) obtiennent l'<strong>abolition du système des Sept Grands Corsaires</strong>, après les désastres Crocodile et Doflamingo. En coulisses, Sabo infiltre la cité pour libérer Bartholomew Kuma, réduit en esclave enchaîné devant les nobles — sans savoir que Kuma s'est en réalité <em>vendu volontairement</em> au Gouvernement des années plus tôt pour garantir la protection de sa fille, Bonney.</p>
+      <p>Cobra, cherchant à percer un secret vieux de 800 ans transmis dans sa famille, demande audience aux Cinq Anciens et pose une question de trop sur le sens du nom « D. ». Une silhouette jusque-là inconnue prend alors la parole depuis le <strong>Trône Vide</strong>, un siège que l'on croyait purement symbolique : <strong>Imu</strong>, la véritable autorité suprême du monde, au-dessus même des Cinq Anciens. Après avoir arraché à Cobra le nom complet de son ancêtre — « Nefertari <strong>D.</strong> Lili » —, Imu l'exécute. Sabo, témoin, tente d'intervenir mais échoue à le sauver ; une photo prise au mauvais moment le fait accuser publiquement de l'assassinat. Le dernier message de Cobra à Sabo : dire à Luffy et Vivi que la famille Nefertari porte, elle aussi, la Volonté du D.</p>
+
+      <!-- IMAGE: Le Trône Vide -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/2/2c/Empty_Throne_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142614" alt="Le Trône Vide" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Le Trône Vide de Mary Geoise — qu'Imu occupe en secret depuis le Siècle Vide.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🏛️🌍 Le plus grand secret du monde</h4>
+          <ul>
+            <li>Le Gouvernement Mondial n'est <strong>pas</strong> dirigé par les Cinq Anciens : ceux-ci ne sont que les exécutants d'un pouvoir plus ancien et plus caché, incarné par Imu, seul occupant légitime du Trône Vide depuis le Siècle Vide.</li>
+            <li>Le nom « D. » n'est pas qu'une coïncidence de prénom : il désigne une lignée (ou un clan) explicitement identifiée par Imu comme « l'ennemi » historique du Gouvernement Mondial — et la maison royale Nefertari, en apparence l'une des plus loyales au système, en fait secrètement partie.</li>
+            <li>Le système des Corsaires est officiellement aboli : les pirates comme Mihawk ou Crocodile perdent leur statut légal du jour au lendemain.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="event">
+        <h4>⚡ Événement majeur — la révélation d'Imu</h4>
+        <p>Après huit cents chapitres à designer les Cinq Anciens comme le sommet absolu du pouvoir, la série révèle en quelques pages qu'il existe un échelon encore au-dessus.</p>
+        <div class="impact"><strong>Portée :</strong> ce basculement rétroactif reconfigure toute la lecture politique de la série : chaque décision « du Gouvernement Mondial » vue jusqu'ici a peut-être été prise, ou validée, par une entité que ni les rois, ni même les Cinq Anciens en apparence, ne peuvent totalement contrôler. Sabo, désormais accusé publiquement à tort, doit se cacher — son rapport complet à Dragon sur ce qu'il a vu n'arrivera que bien plus tard (voir Arc Egghead).</div>
+      </div>
+      <div class="reflect">
+        <span class="tag">💭 Réflexion — le pouvoir a toujours un étage caché</span>
+        Structurellement, Oda répète ici un motif politique classique : toute structure de pouvoir visible (les rois, puis les Cinq Anciens) sert d'écran à un pouvoir encore plus concentré et invisible. Question ouverte pour la suite : est-ce qu'Imu incarne une personne, une fonction, ou littéralement autre chose ? Rien, à ce stade, ne permet de trancher.
+      </div>
+    </div>
+  </details>
+</section>
+</div>
+
+<div class="wrap">
+<section class="saga" id="saga-wano">
+  <div class="saga-head">
+    <div class="saga-seal">10</div>
+    <h3>Wano Kuni — la chute de deux Empereurs</h3>
+    <div class="saga-meta">Ch. 909–1057 · Climax mythologique de toute la première partie de la série</div>
+  </div>
+  <p class="saga-intro">Le pays isolationniste du Japon féodal fantasmé referme vingt ans de complot, révèle la vraie nature du pouvoir de Luffy, et fait tomber pour la première fois un Empereur au combat direct. C'est aussi ici que la série cesse d'être « seulement » une aventure pour devenir, ouvertement, un récit mythologique sur Joy Boy et le Siècle Vide.</p>
+
+  <!-- IMAGE: Kaido -->
+  <div class="img-block">
+    <img src="https://static.wikia.nocookie.net/onepiece/images/0/04/Kaido_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142640" alt="Kaido" loading="lazy" style="max-height:300px;">
+    <div class="img-caption">Kaido, l'un des quatre Empereurs, le « Créature la plus puissante du monde ».</div>
+  </div>
+
+  <details class="arc" open>
+    <summary>Infiltration &amp; préparatifs <span class="arc-range">ch. 909–980</span></summary>
+    <div class="arc-body">
+      <p>Wano vit fermé au monde depuis des siècles, désormais sous la coupe de <strong>Kaido</strong>, un des quatre Empereurs, allié au shogun fantoche <strong>Orochi</strong>. Vingt ans plus tôt, Kaido et Orochi ont fait exécuter <strong>Kozuki Oden</strong>, ancien daimyo légitime — bouilli vivant pendant une heure, refusant de céder jusqu'au bout, devenant une légende vivante pour tout le pays. Sa veuve, Toki, possédait le fruit du temps (Toki Toki no Mi) et a envoyé ses enfants (dont Momonosuke) vingt ans dans le futur pour préparer la revanche. L'équipage infiltre le pays, retrouve les Neuf Fourreaux Rouges (fidèles d'Oden) et prépare, avec l'Alliance des Pirates formée à Zou, l'attaque du bastion flottant de Kaido : Onigashima.</p>
+
+      <!-- IMAGE: Kozuki Oden -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/0/07/Kozuki_Oden_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142642" alt="Kozuki Oden" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Kozuki Oden, le daimyo légendaire de Wano, exécuté par Kaido il y a vingt ans.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🌍 Secrets du monde</h4>
+          <ul>
+            <li>Kozuki Oden a navigué avec l'équipage de Roger et a atteint <strong>Laugh Tale</strong>, la dernière île — il connaît donc, comme Roger, toute la vérité du Siècle Vide. Il choisit de graver un message pour l'avenir dans un Ponéglyphe plutôt que de le révéler de son vivant.</li>
+            <li>Confirmation officielle (via Sengoku, dans un flash-back) que <strong>Kaido, Big Mom et Barbe Blanche</strong> appartenaient autrefois au même équipage : les <strong>Pirates Rocks</strong>, dirigés par Rocks D. Xebec, détruits il y a 38 ans lors de « l'incident de God Valley » par une alliance improbable entre le jeune Garp et le jeune Roger.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="arc" open>
+    <summary>Le Raid sur Onigashima <span class="arc-range">ch. 981–1057</span></summary>
+    <div class="arc-body">
+      <p>Bataille massive durant le Festival du Feu : l'Alliance (Straw Hats, Heart Pirates, Mink, 5000 samouraïs, Fourreaux Rouges) attaque Onigashima de front. Big Mom débarque aussi pour se venger de Luffy après Whole Cake Island, formant une alliance de circonstance instable avec Kaido. Yamato, l'enfant de Kaido qui s'est toujours identifié à Oden plutôt qu'à son père, rejoint le camp de Luffy. Après un combat titanesque et plusieurs fois au bord de la mort, Luffy débloque, sans le chercher consciemment, la véritable forme de son fruit du démon.</p>
+
+      <!-- IMAGE: Gear 5 -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/3/38/Luffy_Gear_5_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142714" alt="Luffy Gear 5" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Luffy en Gear 5 — l'éveil du fruit Nika, le dieu-soleil de la liberté.</div>
+      </div>
+
+      <div class="event">
+        <h4>⚡ Événement majeur — l'éveil du Gear 5 et la révélation de Nika</h4>
+        <p>Le fruit que le monde entier connaît sous le nom de « Gomu Gomu no Mi » (Paramecia) est en réalité le <strong>Hito Hito no Mi, Modèle Nika</strong> — un Zoan Mythique légendaire, rebaptisé et dissimulé volontairement par le Gouvernement Mondial. Nika est le « dieu soleil » d'une légende ancienne originaire d'Elbaf, dieu de la liberté absolue, capable de plier la réalité comme un dessin animé. Luffy, en s'éveillant, devient littéralement une incarnation vivante de cette légende.</p>
+        <div class="impact"><strong>Portée :</strong> les Cinq Anciens, en voyant Luffy s'éveiller en direct, sont pris de panique authentique — la première fois de toute la série qu'on les voit réellement effrayés. Ce fruit était activement recherché et son retour redouté depuis des siècles : ils avaient d'ailleurs déjà tenté de faire tuer Luffy en secret avant même Dressrosa, en anticipant ce scénario. Ce basculement transforme rétroactivement toute la quête de Luffy : il n'est plus seulement « un pirate de plus », il est peut-être l'héritier direct d'un personnage historique, <strong>Joy Boy</strong>, dont le nom n'a encore jamais été expliqué à ce stade.</div>
+      </div>
+      <p>Luffy bat Kaido en combat singulier — la toute première défaite en duel direct d'un Empereur dans l'histoire de la série. Momonosuke devient le nouveau shogun légitime de Wano et choisit, malgré la possibilité désormais offerte, de <strong>garder le pays fermé</strong> encore quelque temps : sous le mont Fuji dort Pluton, la première Arme Antique, et Wano n'est pas prêt à en assumer la responsabilité face au monde extérieur.</p>
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🏛️ Gouvernement Mondial</h4>
+          <p>Dans la foulée du chaos, Mihawk et Crocodile (ex-Corsaires sans statut) s'associent à Buggy pour former la <strong>Cross Guild</strong>, une agence de primes qui capture des pirates contre rançon — la Marine, en interprétant mal la hiérarchie du trio, propulse par erreur Buggy au rang de nouvel Empereur.</p>
+        </div>
+        <div class="info-box">
+          <h4>🧑‍🤝‍🧑 Personnages</h4>
+          <p>Luffy et Buggy sont officiellement reconnus comme les nouveaux Empereurs, aux côtés de Shanks et Barbe Noire, remplaçant Kaido et Big Mom dans l'équilibre des puissances mondiales.</p>
+        </div>
+      </div>
+      <div class="reflect">
+        <span class="tag">💭 Réflexion — reconstruire après la tyrannie</span>
+        Le choix de Momonosuke de garder Wano fermé, même après la libération, est un rare moment où One Piece ne célèbre pas l'ouverture et la liberté sans nuance : parfois, protéger une reconstruction fragile passe par la prudence, pas par l'idéalisme immédiat. Un contrepoint intéressant à la philosophie habituelle de Luffy.
+      </div>
+    </div>
+  </details>
+</section>
+</div>
+
+<hr class="divider">
+
+<div class="wrap">
+<div class="part-banner">
+  <div class="eyebrow">Interlude — avant de plonger dans la Saga Finale</div>
+  <h2>Comprendre le monde</h2>
+  <p>Quatre repères transversaux pour s'y retrouver : qui dirige vraiment, qui est lié à qui, où se trouvent les choses, et ce que sont ces fameuses Armes Antiques. Utile pour la suite — Egghead va convoquer toutes ces briques d'un coup.</p>
+</div>
+
+<h2 class="section-h" id="gouvernement">Le Gouvernement Mondial — organigramme du pouvoir</h2>
+<p class="lede-p">Ce que la série a mis <strong>908 chapitres</strong> à assembler pièce par pièce.</p>
+</div>
+
+<div class="wrap">
+<div class="diagram">
+<div class="diagram-title">Structure officielle (et officieuse) du pouvoir</div>
+<div class="mermaid">
+flowchart TD
+    IMU["Imu<br/>Occupant du Trône Vide<br/>seule autorité absolue — nature exacte inconnue"]
+    GOROSEI["Les Cinq Anciens, dits Gorosei<br/>Saturn, Nusjuro, Mars, Warcury, Peter<br/>autorité suprême aux yeux du monde"]
+    FLEETADM["Amiral en Chef de la Marine"]
+    ADMIRALS["Amiraux<br/>ex. Kizaru, Akainu, Aokiji, Fujitora"]
+    VA["Vice-Amiraux, Capitaines, troupes"]
+    CP["Cipher Pol, CP0 à CP9<br/>renseignement et opérations clandestines"]
+    NOBLES["Dragons Célestes<br/>descendants des 20 royaumes fondateurs"]
+    KINGS["Rois et reines membres<br/>Reverie tous les 4 ans"]
+    SHICHI["Sept Grands Corsaires<br/>pirates légalisés — aboli après la Reverie"]
+
+    IMU --> GOROSEI
+    GOROSEI --> FLEETADM
+    FLEETADM --> ADMIRALS
+    ADMIRALS --> VA
+    GOROSEI --> CP
+    GOROSEI --> NOBLES
+    GOROSEI --> KINGS
+    GOROSEI -. historiquement .-> SHICHI
+</div>
+<div class="diagram-cap">Les Cinq Anciens ont longtemps semblé être le sommet de la pyramide — la Reverie révèle qu'ils ne sont que les gérants d'un pouvoir plus ancien.</div>
+</div>
+
+<div class="info-grid">
+  <div class="info-box">
+    <h4>⚓ Les Trois Grandes Puissances</h4>
+    <p>L'équilibre du monde repose officiellement sur trois forces qui se surveillent mutuellement : la <strong>Marine</strong> (bras armé légal), les <strong>Empereurs</strong> (Yonko, pirates dominant le Nouveau Monde) et, autrefois, les <strong>Sept Grands Corsaires</strong> (pirates sous contrat, aujourd'hui abolis). Retirer un pilier — comme l'abolition des Corsaires — déséquilibre tout l'édifice.</p>
+  </div>
+  <div class="info-box">
+    <h4>🕵️ Le Cipher Pol</h4>
+    <p>Réseau d'espionnage à plusieurs échelons (CP1 à CP9), agissant sous couverture, capable d'opérer hors de toute juridiction locale. CP0 en est la branche la plus élevée, en contact direct avec les Cinq Anciens.</p>
+  </div>
+  <div class="info-box">
+    <h4>📜 La Reverie</h4>
+    <p>Sommet mondial réunissant tous les dirigeants des royaumes membres, une fois tous les quatre ans, à Mary Geoise. C'est le seul moment où les rois peuvent, en théorie, faire entendre leur voix face au Gouvernement central.</p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<h2 class="section-h" id="genealogie">Arbres généalogiques</h2>
+<p class="lede-p">Le motif du « D. » traverse toute la série sans qu'on en connaisse le sens exact avant très longtemps — seulement qu'il désigne, aux yeux d'Imu, « l'ennemi ».</p>
+</div>
+
+<div class="wrap">
+<div class="diagram">
+<div class="diagram-title">Le mystère du « D. » et les lignées royales</div>
+<div class="mermaid">
+flowchart TD
+    ROCKS["Rocks D. Xebec<br/>capitaine des Pirates Rocks<br/>détruit à God Valley il y a 38 ans"]
+    TEACH["Marshall D. Teach<br/>Barbe Noire"]
+    ROGER["Gol D. Roger<br/>Roi des Pirates<br/>exécuté il y a 24 ans"]
+    ACE["Portgas D. Ace<br/>mort à Marineford"]
+    GARP["Monkey D. Garp<br/>Héros de la Marine"]
+    DRAGON["Monkey D. Dragon<br/>chef de l'Armée Révolutionnaire"]
+    LUFFY["Monkey D. Luffy"]
+    SABO["Sabo<br/>frère juré, adopté"]
+    LILI["Nefertari D. Lili<br/>ancienne reine d'Alabasta"]
+    COBRA["Nefertari Cobra<br/>assassiné par Imu"]
+    VIVI["Nefertari Vivi"]
+
+    ROCKS --> TEACH
+    ROGER --> ACE
+    GARP --> DRAGON
+    DRAGON --> LUFFY
+    LILI --> COBRA
+    COBRA --> VIVI
+    ACE -. frères jurés .- LUFFY
+    ACE -. frères jurés .- SABO
+    LUFFY -. frères jurés .- SABO
+</div>
+<div class="diagram-cap">Trois lignées « D. » confirmées (Roger, Monkey, Nefertari) + Rocks D. Xebec, dont on ignore encore l'origine exacte du nom.</div>
+</div>
+
+<div class="diagram">
+<div class="diagram-title">Vinsmoke — Royaume de Germa 66</div>
+<div class="mermaid">
+flowchart TD
+    JUDGE["Vinsmoke Judge<br/>Roi de Germa 66"]
+    SORA["Vinsmoke Sora<br/>mère, décédée<br/>a sacrifié sa santé pour Sanji"]
+    ICHIJI["Ichiji"]
+    NIJI["Niji"]
+    SANJI["Sanji<br/>seul resté pleinement humain"]
+    REIJU["Reiju"]
+    YONJI["Yonji"]
+    JUDGE --- ICHIJI
+    JUDGE --- NIJI
+    JUDGE --- SANJI
+    JUDGE --- REIJU
+    JUDGE --- YONJI
+    SORA -. a protégé .-> SANJI
+</div>
+<div class="diagram-cap">Les quatre autres enfants ont été génétiquement modifiés in utero pour supprimer la douleur et l'empathie ; Sanji, resté « imparfait », est le seul à avoir gardé ses émotions et son sens du goût.</div>
+</div>
+
+<div class="diagram">
+<div class="diagram-title">Les rescapés de God Valley</div>
+<div class="mermaid">
+flowchart LR
+    GINNY["Ginny<br/>esclave à God Valley"]
+    KUMA["Bartholomew Kuma<br/>Buccaneer, ex-Corsaire"]
+    IVANKOV["Emporio Ivankov<br/>Armée Révolutionnaire"]
+    BONNEY["Jewelry Bonney"]
+    GARLING["St. Figarland Garling<br/>Dragon Céleste"]
+    SHANKS["Shanks<br/>séparé de son jumeau enfant"]
+    SHAMROCK["Shamrock<br/>frère jumeau de Shanks"]
+
+    GINNY --> BONNEY
+    KUMA --> BONNEY
+    KUMA -. évadés ensemble .- IVANKOV
+    KUMA -. évadés ensemble .- GINNY
+    GARLING --> SHANKS
+    GARLING --> SHAMROCK
+</div>
+<div class="diagram-cap">Kuma, Ivankov et Ginny s'évadent ensemble de God Valley avec près de 500 autres esclaves. Le même événement sépare les jumeaux Shanks et Shamrock, fils d'un Dragon Céleste renié.</div>
+</div>
+</div>
+
+<div class="wrap">
+<hr class="divider">
+<h2 class="section-h" id="geographie">Géographie du monde</h2>
+<p class="lede-p">Le monde de One Piece n'est pas une carte plate classique : un unique continent-anneau, la <strong>Red Line</strong>, encercle la planète du nord au sud ; la <strong>Grand Line</strong> l'encercle perpendiculairement, d'est en ouest, séparant le monde en quatre mers (« Blues ») et formant, à ses deux points de croisement avec la Red Line, les endroits les plus verrouillés du monde. Voici le parcours effectivement suivi par l'équipage, dans l'ordre.</p>
+</div>
+
+<div class="wrap">
+<div class="diagram" style="overflow-x:auto;">
+<div class="diagram-title">Le parcours de l'équipage, dans l'ordre</div>
+<div style="display:flex; align-items:stretch; gap:0; flex-wrap:nowrap; min-width:1000px; font-family:var(--mono); font-size:12.5px; margin-top:18px;">
+  <div style="flex:1; background:rgba(201,162,75,0.08); border:1px solid rgba(201,162,75,0.3); border-radius:4px; padding:12px; text-align:center;">
+    <strong style="color:var(--gold-bright); font-family:var(--serif-display); display:block; margin-bottom:6px;">East Blue</strong>
+    Fûsha Village → Baratie → Arlong Park → Loguetown
+  </div>
+  <div style="display:flex; align-items:center; padding:0 6px; color:var(--gold);">→</div>
+  <div style="flex:1.6; background:rgba(201,162,75,0.08); border:1px solid rgba(201,162,75,0.3); border-radius:4px; padding:12px; text-align:center;">
+    <strong style="color:var(--gold-bright); font-family:var(--serif-display); display:block; margin-bottom:6px;">Grand Line — Paradis</strong>
+    Reverse Mountain → Alabasta → Skypiea (îlot céleste) → Water 7 → Enies Lobby → Thriller Bark → Sabaody → Amazon Lily → Impel Down
+    <div style="margin-top:6px; color:var(--text-dim);">Calme Plat de part et d'autre : les Rois des Mers empêchent toute fuite facile.</div>
+  </div>
+  <div style="display:flex; align-items:center; padding:0 6px; color:var(--red-bright);">→</div>
+  <div style="flex:1.3; background:rgba(165,58,47,0.12); border:1px solid rgba(165,58,47,0.4); border-radius:4px; padding:12px; text-align:center;">
+    <strong style="color:var(--red-bright); font-family:var(--serif-display); display:block; margin-bottom:6px;">La Red Line</strong>
+    Marineford &amp; Impel Down (au pied du mur) — Mary Geoise tout en haut, cité des Dragons Célestes — Marineford accueille la Guerre au Sommet
+  </div>
+  <div style="display:flex; align-items:center; padding:0 6px; color:var(--red-bright);">→</div>
+  <div style="flex:1; background:rgba(79,184,201,0.1); border:1px solid rgba(79,184,201,0.35); border-radius:4px; padding:12px; text-align:center;">
+    <strong style="color:var(--blueprint-bright); font-family:var(--serif-display); display:block; margin-bottom:6px;">Passage sous-marin</strong>
+    Fishman Island — royaume englouti, littéralement sous la Red Line, porte d'entrée du Nouveau Monde
+  </div>
+  <div style="display:flex; align-items:center; padding:0 6px; color:var(--gold);">→</div>
+  <div style="flex:2.4; background:rgba(201,162,75,0.08); border:1px solid rgba(201,162,75,0.3); border-radius:4px; padding:12px; text-align:center;">
+    <strong style="color:var(--gold-bright); font-family:var(--serif-display); display:block; margin-bottom:6px;">Grand Line — Nouveau Monde</strong>
+    Punk Hazard → Dressrosa → Zou → Whole Cake Island → Wano Kuni → <span style="color:var(--blueprint-bright)">Egghead</span> → <span style="color:var(--blueprint-bright)">Elbaf</span> → ... → Laugh Tale (position inconnue)
+  </div>
+</div>
+<div class="diagram-cap">Schéma original simplifié (pas une reproduction de la carte d'Oda) : la Grand Line et la Red Line s'entrecroisent en réalité <em>deux fois</em> sur le globe — seul le passage « visible » de l'histoire est représenté ici.</div>
+</div>
+</div>
+
+<div class="wrap">
+<hr class="divider">
+<h2 class="section-h" id="armes">Les trois Armes Antiques</h2>
+<p class="lede-p">Trois instruments de destruction datant du Siècle Vide, que Joy Boy a choisi de préserver plutôt que de détruire — pour des raisons encore obscures à ce stade du récit.</p>
+<div class="info-grid" style="grid-template-columns:repeat(3,1fr);">
+  <div class="info-box">
+    <h4>⚔️ Pluton</h4>
+    <p>Le plus puissant navire de guerre jamais construit, capable de raser une île en une salve. Ses plans ont été détenus par Franky ; l'engin lui-même dort sous le Mont Fuji, à Wano.</p>
+  </div>
+  <div class="info-box">
+    <h4>🌊 Poséidon</h4>
+    <p>Pas un objet mais une capacité vivante, transmise dans une lignée de sirènes : le pouvoir de commander les Rois des Mers. Actuellement incarnée par Shirahoshi, princesse de Fishman Island.</p>
+  </div>
+  <div class="info-box">
+    <h4>☁️ Uranus</h4>
+    <p>La seule des trois dont la nature reste un mystère total à ce stade — seul son nom est connu depuis Fishman Island. Sa localisation et sa forme n'ont jamais été confirmées avant Egghead.</p>
+  </div>
+</div>
+</div>
+
+<div class="wrap">
+<div class="part-banner tech">
+  <div class="eyebrow">Partie II — Registre « Punk Records » · jusqu'au chapitre 1130</div>
+  <h2>La Saga Finale commence</h2>
+  <p>Ici, le carnet change de nature. Fini le rythme « une île, un antagoniste, un problème réglé » : à partir d'Egghead, la série assume pleinement son statut de thriller géopolitique et mythologique, et distille en moins de 70 chapitres davantage de révélations que dans les 1000 précédents. Traitement chapitre par chapitre, sans raccourci.</p>
+</div>
+</div>
+
+<div class="wrap">
+<section class="saga tech" id="saga-egghead">
+  <div class="saga-head">
+    <div class="saga-seal">11</div>
+    <h3>Egghead — le Siècle Vide dévoilé</h3>
+    <div class="saga-meta">Ch. 1058–1125 · 68 chapitres · la plus grande révélation de lore de toute la série</div>
+  </div>
+  <p class="saga-intro">Une île artificielle où la technologie a 500 ans d'avance sur le reste du monde, dirigée par le plus grand cerveau vivant — sur laquelle le Gouvernement Mondial est sur le point de commettre son deuxième Ohara. Sauf que cette fois, la vérité ne sera pas contenue : elle sera diffusée à la planète entière, en direct.</p>
+
+  <!-- IMAGE: Vegapunk -->
+  <div class="img-block tech-img">
+    <img src="https://static.wikia.nocookie.net/onepiece/images/f/f6/Dr._Vegapunk_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142528" alt="Dr. Vegapunk" loading="lazy" style="max-height:300px;">
+    <div class="img-caption">Dr. Vegapunk, le plus grand scientifique du monde, détenteur des secrets du Siècle Vide.</div>
+  </div>
+
+  <details class="arc" open>
+    <summary>Arrivée à Egghead &amp; la vengeance de Bonney <span class="arc-range">ch. 1058–1067</span></summary>
+    <div class="arc-body">
+      <p>Après Wano, l'équipage rencontre en mer <strong>Jewelry Bonney</strong>, membre de la « pire génération », dont le navire vient d'être détruit par un requin-machine. Elle voyage seule vers Egghead avec un seul objectif : tuer le Dr. Vegapunk, qu'elle tient pour responsable de ce qui est arrivé à son père — Bartholomew Kuma. Recueillie avec Luffy et Chopper sur l'île, elle découvre que Vegapunk n'est pas <em>une</em> personne mais <strong>sept</strong> : le corps original, « Stella » (une petite fille, forme physique réelle et vieillissante du savant), et six « Satellites » — des clones artificiels incarnant chacun un trait de sa personnalité : <strong>Shaka</strong> (sagesse), <strong>Lilith</strong> (amour), <strong>Edison</strong> (action), <strong>Pythagoras</strong> (intellect), <strong>Atlas</strong> (violence) et <strong>York</strong> (avidité).</p>
+
+      <!-- IMAGE: Bonney -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/3/3c/Jewelry_Bonney_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142639" alt="Jewelry Bonney" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Jewelry Bonney, la « Gloutonne », membre de la pire génération, en quête de vengeance sur Vegapunk.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🧑‍🤝‍🧑 Personnages</h4>
+          <ul>
+            <li><strong>Bonney</strong> peut altérer temporairement son âge (fruit Toshi Toshi) mais souffre en réalité d'une maladie liée aux expériences menées par le Gouvernement sur sa mère, Ginny.</li>
+            <li><strong>Vegapunk</strong> est le seul scientifique en vie assez brillant pour avoir déchiffré les Ponéglyphes et lu <em>l'intégralité</em> des livres sauvés d'Ohara — un savoir qui, aux yeux du Gouvernement, le rend aussi dangereux qu'utile.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="reflect">
+        <span class="tag">💭 Réflexion — un génie divisé contre lui-même</span>
+        Faire de Vegapunk sept entités distinctes n'est pas qu'un gadget visuel : c'est une manière littérale de montrer qu'aucun génie n'est monolithique. La trahison qui va suivre (York, l'avidité, vendant tout le monde) est donc littéralement une partie de Vegapunk qui trahit le reste de lui-même — une allégorie assez frontale du conflit intérieur entre ambition scientifique et responsabilité morale.
+      </div>
+    </div>
+  </details>
+</section>
+</div>
+
+<div class="wrap">
+<section class="saga tech">
+  <details class="arc" open>
+    <summary>Le passé de Bartholomew Kuma <span class="arc-range">flash-back, ch. 1096–1099</span></summary>
+    <div class="arc-body">
+      <p>Long flash-back parmi les plus durs de la série. Kuma appartient aux <strong>Buccaneers</strong>, un peuple quasiment exterminé, considéré comme sous-humain par les Dragons Célestes au même titre que les Lunariens ou les Hommes-Poissons. Enfant, il voit ses deux parents mourir de mauvais traitements. Réduit en esclavage avec d'autres enfants, il est envoyé à <strong>God Valley</strong> pour la « Compétition de Chasse aux Autochtones » : un jeu grandeur nature où les Nobles Mondiaux chassent pour le sport des esclaves et les habitants de l'île.</p>
+      <p>Là, il rencontre <strong>Ginny</strong> et le jeune <strong>Emporio Ivankov</strong>. Le chaos éclate quand les Pirates Rocks, les Pirates de Roger et les renforts de la Marine menés par Garp débarquent simultanément sur l'île pour des raisons qui leur sont propres. Profitant de la confusion, Kuma se porte volontaire pour aller chercher deux Fruits du Démon promis en récompense de la compétition : Big Mom s'empare de l'un (Uo Uo no Mi, Modèle Azure Dragon) avant qu'Ivankov ne puisse le manger, mais Kuma parvient à avaler le second, le <strong>Nikyu Nikyu no Mi</strong>. À peine transformé, il est aussitôt neutralisé par un certain <strong>Jaygarcia Saturn</strong>, qui lui assène une phrase glaçante : les Buccaneers sont nés pour être esclaves, un point c'est tout. Malgré cela, Kuma parvient à utiliser son nouveau pouvoir pour aider environ <strong>500 esclaves</strong> à s'échapper de l'île avant que la bataille entre Rocks, Roger et Garp ne dégénère complètement.</p>
+
+      <!-- IMAGE: Bartholomew Kuma -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/2/29/Bartholomew_Kuma_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142543" alt="Bartholomew Kuma" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Bartholomew Kuma, le Buccaneer au cœur tendre, dont le sacrifice sera révélé à Egghead.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🌍 Secrets du monde</h4>
+          <ul>
+            <li>« l'incident de God Valley », déjà mentionné pendant Wano comme le moment où Garp est devenu un héros et où les Pirates Rocks ont été anéantis, avait en réalité une face totalement cachée : un massacre organisé de civils, pour le loisir des Nobles Mondiaux.</li>
+            <li>L'existence même de l'île de God Valley a depuis été effacée des cartes du monde.</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>🧑‍🤝‍🧑 Personnages</h4>
+          <p>Kuma, Ivankov et Ginny resteront liés pour la vie ; Kuma deviendra plus tard l'un des cofondateurs, aux côtés de Dragon et Ivankov, de ce qui deviendra l'Armée Révolutionnaire — avant de finir par se « vendre » entièrement au Gouvernement Mondial, effaçant sa propre mémoire et sa volonté, pour garantir la protection de sa fille Bonney, née de son lien avec Ginny.</p>
+        </div>
+      </div>
+      <div class="reflect">
+        <span class="tag">💭 Réflexion — la servitude comme dernier acte d'amour</span>
+        Le sacrifice de Kuma renverse la lecture qu'on pouvait avoir de lui depuis Thriller Bark : ce qui ressemblait à de la soumission passive à un système était en réalité le choix le plus actif et le plus déchirant qu'un père puisse faire pour son enfant — devenir littéralement une arme sans volonté propre plutôt que de laisser sa fille mourir. Le prix de cet amour est payé par Bonney seule, qui ignore tout de ce sacrifice pendant des années et voue une haine mal orientée à Vegapunk.
+      </div>
+    </div>
+  </details>
+
+  <details class="arc" open>
+    <summary>La trahison de York &amp; le siège de la Marine <span class="arc-range">ch. 1068–1107</span></summary>
+    <div class="arc-body">
+      <p>York, le Satellite incarnant l'avidité de Vegapunk, a passé des années à vendre en secret les recherches du savant aux Cinq Anciens, en échange d'une promesse : devenir elle-même une Dragonne Céleste. Elle emprisonne Vegapunk et retourne les Pacifistas / Seraphim (armes robotiques de l'île) contre tout le monde. Simultanément, le Gouvernement Mondial dépêche une équipe du <strong>CP0</strong> avec ordre d'assassiner Vegapunk — et masse une flotte entière de la Marine autour de l'île, prête à se transformer en Buster Call.</p>
+
+      <!-- IMAGE: Egghead -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/d/dd/Egghead_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142601" alt="Egghead" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Egghead, l'île du futur, théâtre du plus grand déversement de lore de la série.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🏛️ Gouvernement Mondial</h4>
+          <p>Même le scientifique qui a offert au Gouvernement Mondial ses plus grandes avancées militaires (Pacifistas, Seraphim) n'est pas épargné dès lors qu'il détient un savoir jugé trop dangereux. Aucun service rendu ne protège de la doctrine du secret à tout prix.</p>
+        </div>
+      </div>
+      <div class="reflect">
+        <span class="tag">💭 Réflexion — la loyauté récompensée par la trahison</span>
+        York incarne un motif que la série creuse depuis Alabasta : le Gouvernement Mondial préfère toujours éliminer ceux qui en savent trop plutôt que de risquer une fuite — quelle que soit leur utilité. C'est un système qui ne peut, structurellement, récompenser la loyauté au-delà d'un certain seuil de savoir.
+      </div>
+    </div>
+  </details>
+</section>
+</div>
+
+<div class="wrap">
+<section class="saga tech">
+  <details class="arc" open>
+    <summary>Pendant ce temps, ailleurs dans le monde <span class="arc-range">chapitres entrecoupés</span></summary>
+    <div class="arc-body">
+      <p>Egghead n'est qu'un des foyers d'incendie. En parallèle, la carte du monde se redessine :</p>
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🏴‍☠️ Barbe Noire en mouvement</h4>
+          <p>Les Pirates de Barbe Noire attaquent Amazon Lily pour s'emparer d'informations liées à Laugh Tale ; Boa Hancock est sauvée de justesse par Silvers Rayleigh. Ailleurs, l'équipage de Law affronte directement Barbe Noire et en ressort décimé, Law s'en sortant de justesse. Eustass Kid, lui, est vaincu par Shanks au large d'Elbaf — un combat que le lecteur ne voit presque pas, seulement ses conséquences.</p>
+        </div>
+        <div class="info-box">
+          <h4>⚖️ Cross Guild</h4>
+          <p>Buggy, Mihawk et Crocodile installent leur agence de capture de primes, brouillant encore un peu plus la frontière entre pirates, chasseurs de primes et autorité légale.</p>
+        </div>
+        <div class="info-box">
+          <h4>🐗 Koby &amp; Garp</h4>
+          <p>Koby, jeune enseigne de Marine autrefois sauvé par Luffy, est enlevé par l'équipage de Barbe Noire — un fil qui inquiète particulièrement Garp.</p>
+        </div>
+      </div>
+
+      <!-- IMAGE: Shanks -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/0/03/Shanks_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142728" alt="Shanks" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Shanks le Roux, l'un des quatre Empereurs, qui défait Eustass Kid au large d'Elbaf.</div>
+      </div>
+
+      <div class="reflect">
+        <span class="tag">💭 Réflexion — une saga qui refuse de rester sur une seule île</span>
+        Pour la première fois, Oda découpe le récit en vignettes simultanées façon actualités mondiales plutôt qu'en une seule ligne d'aventure. Le message est clair : à ce stade de l'histoire, plus aucun événement n'est local — tout est désormais géopolitique.
+      </div>
+    </div>
+  </details>
+
+  <details class="arc" open>
+    <summary>Saturn débarque : les vrais visages des Cinq Anciens <span class="arc-range">ch. 1094–1110</span></summary>
+    <div class="arc-body">
+      <p>Fait sans précédent : l'un des Cinq Anciens en personne, <strong>Jaygarcia Saturn</strong>, se déplace jusqu'à Egghead, accompagné de l'Amiral Kizaru. Sa seule arrivée fait basculer l'ambiance de l'arc : jusqu'ici de la science-fiction aventureuse, Egghead devient un lieu de guerre existentielle. Puis, lorsque la situation s'aggrave, les quatre autres Anciens sont contraints de le rejoindre — la toute première fois que les cinq se déplacent ensemble hors de Mary Geoise dans toute la série.</p>
+      <p>Leurs véritables formes sont alors révélées : chacun a mangé, et <strong>éveillé</strong>, un Zoan Mythique inspiré de créatures légendaires est-asiatiques. Saturn devient un <em>Gyuki</em> (démon-bœuf-araignée), Nusjuro un <em>Bakotsu</em> (cheval-squelette, seul combattant à l'épée du groupe), Mars un <em>Itsumade</em> (oiseau-démon géant), Warcury un <em>Fengxi</em> (sanglier à quatre défenses), et Peter un ver des sables titanesque. Sabo, présent en soutien, décrit la scène comme littéralement sortie de l'enfer.</p>
+
+      <!-- IMAGE: Les Cinq Anciens -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/f/f8/Gorosei_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142627" alt="Les Cinq Anciens" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Les Cinq Anciens, dévoilant leurs véritables formes de Zoans Mythiques à Egghead.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🌍 Secrets du monde</h4>
+          <p>Les Cinq Anciens ne sont donc pas de simples politiciens âgés : ce sont des monstres immortels ayant survécu et régné depuis des siècles, dissimulés derrière une apparence humaine. Leur pouvoir dépasse de loin celui d'un Devil Fruit ordinaire — téléportation par cercle magique, télépathie entre eux, régénération quasi instantanée.</p>
+        </div>
+      </div>
+      <div class="event">
+        <h4>⚡ Événement majeur — la mobilisation totale des Cinq Anciens</h4>
+        <p>Que l'intégralité du sommet du pouvoir mondial se déplace en personne, en pleine bataille, pour empêcher une diffusion, révèle l'ampleur de ce que Vegapunk s'apprête à révéler.</p>
+        <div class="impact"><strong>Portée :</strong> jusqu'ici, le Gouvernement Mondial pouvait toujours déléguer sa violence (Marine, Corsaires, CP0). Le voir agir directement et personnellement, en pleine lumière, signale qu'aucune marge de manœuvre bureaucratique ne suffit plus face à ce qui est sur le point de se produire.</div>
+      </div>
+    </div>
+  </details>
+</section>
+</div>
+
+<div class="wrap">
+<section class="saga tech">
+  <details class="arc" open>
+    <summary>Le message de Vegapunk : le Siècle Vide dévoilé <span class="arc-range">ch. 1108–1121</span></summary>
+    <div class="arc-body">
+      <p>Blessé mortellement, Stella (le corps original de Vegapunk) meurt — déclenchant un message pré-enregistré diffusé par Den Den Mushi à la planète entière, pendant que la bataille fait rage autour de l'antenne. C'est le plus grand déversement de lore de toute la série, condensé en quelques chapitres. Vegapunk avoue d'abord avoir commis « deux péchés » : avoir développé la <strong>Flamme Mère</strong> (Mother Flame), une source d'énergie inédite dont une partie a été volée puis utilisée pour rayer le royaume de <strong>Lulusia</strong> de la carte ; et avoir percé le secret interdit du Siècle Vide en lisant l'intégralité des archives sauvées d'Ohara.</p>
+
+      <!-- IMAGE: Lulusia -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/e/e7/Lulusia_Kingdom_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142716" alt="Lulusia" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Le royaume de Lulusia, rayé de la carte par l'arme Uranus.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>👑 Le Royaume Ancien &amp; Joy Boy</h4>
+          <ul>
+            <li>Il y a 900 ans a existé un <strong>Royaume Ancien</strong> d'une avancée technologique stupéfiante — largement supérieure à celle de Vegapunk lui-même, qui se juge incapable de la reproduire entièrement.</li>
+            <li><strong>Joy Boy</strong>, natif de ce royaume, en est parti et est devenu le <strong>tout premier pirate</strong> de l'Histoire. Il possédait le pouvoir du Hito Hito no Mi, Modèle Nika — le même fruit que Luffy porte aujourd'hui.</li>
+            <li>Nika et Joy Boy sont deux entités distinctes : Nika est la légende/le dieu-soleil originaire d'Elbaf ; Joy Boy est l'homme, bien réel, qui a un jour incarné cette légende via le fruit.</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>⚔️ La Grande Guerre</h4>
+          <ul>
+            <li>Joy Boy et le Royaume Ancien se sont affrontés à une <strong>Alliance de 20 Royaumes</strong> — l'organisation qui deviendra, après sa victoire, l'actuel <strong>Gouvernement Mondial</strong>.</li>
+            <li>Le Siècle Vide s'est achevé sur la <strong>défaite de Joy Boy</strong> — la première confirmation que le pouvoir de Nika, aussi absurde soit-il, n'est pas invincible.</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>🌊 Le naufrage du monde</h4>
+          <ul>
+            <li>La guerre a mobilisé des <strong>Armes Antiques</strong> d'une puissance telle que le niveau des mers est monté de <strong>200 mètres</strong>, engloutissant la quasi-totalité des continents d'alors.</li>
+            <li>Le monde actuel n'est composé que des fragments de terre qui dépassaient encore de l'eau — ce que tout le monde prenait pour « la géographie normale » n'est en réalité que le résultat d'une catastrophe entièrement provoquée par l'homme.</li>
+            <li>Joy Boy a choisi de préserver les trois Armes Antiques pour l'avenir plutôt que de les détruire, sans que la raison en soit donnée.</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>✋ Message coupé</h4>
+          <p>Vegapunk s'apprête à révéler quelque chose d'essentiel « à tous ceux qui portent le nom de D. » lorsque les Cinq Anciens, arrivés sur place, utilisent leur Haki des Rois pour assommer les gens à portée — coupant la diffusion locale avant la toute fin. Le message se termine tout de même sur la confirmation que le <strong>One Piece existe réellement</strong>, et que le sort du monde reposera entre les mains de quiconque le trouvera.</p>
+        </div>
+      </div>
+
+      <div class="event">
+        <h4>⚡ Événement majeur — vingt ans de mystères balayés en un message</h4>
+        <p>En un seul discours, la série confirme quasi tout ce que les théories fan les plus sérieuses avaient échafaudé depuis des années : l'existence d'une civilisation antérieure, la nature de Joy Boy, l'origine du naufrage du monde, et la nature militaire des Armes Antiques.</p>
+        <div class="impact"><strong>Portée :</strong> le Gouvernement Mondial perd d'un coup son arme la plus précieuse — le silence. Désormais, la question n'est plus « que cache l'Histoire ? » mais « que va faire le monde, maintenant qu'il sait ? ». Les premières réactions montrées (Doflamingo en prison, Akainu, d'anciens ennemis) suggèrent une onde de choc politique à l'échelle planétaire, dont les conséquences ne sont pas encore mesurables à ce stade du récit.</div>
+      </div>
+
+      <div class="reflect">
+        <span class="tag">💭 Réflexion — la vérité rendue publique change-t-elle vraiment le pouvoir en place ?</span>
+        Historiquement, la simple connaissance d'une injustice ne suffit pas à la faire cesser — encore faut-il un rapport de force pour l'exploiter. Vegapunk le dit lui-même en creux : il ne juge pas qui, de Joy Boy ou de l'Alliance des 20 Royaumes, avait raison. Le message ne fait qu'ouvrir un débat historique déjà politiquement inflammable — il ne le tranche pas. La suite de la série (Elbaf et au-delà) devra montrer si la vérité, seule, suffit à faire vaciller neuf cents ans de récit officiel.
+      </div>
+    </div>
+  </details>
+</section>
+</div>
+
+<div class="wrap">
+<section class="saga tech">
+  <details class="arc" open>
+    <summary>La bataille finale et l'évasion d'Egghead <span class="arc-range">ch. 1109–1125</span></summary>
+    <div class="arc-body">
+      <p>Pendant que le message tourne, Saturn retrouve Bonney et lui révèle, avec une cruauté calculée, qu'il a personnellement orchestré les souffrances de sa mère Ginny par le passé. Au moment où tout semble perdu, ce qu'il reste de Kuma — vidé de sa mémoire, réduit à l'état d'arme silencieuse — brise sa propre programmation le temps d'un ultime geste : un coup de poing dévastateur qui sauve sa fille. Vegapunk lui-même s'interroge : comment une conscience qu'on croyait effacée a-t-elle pu resurgir pour protéger quelqu'un ?</p>
+      <p>Fou de rage, Saturn ordonne un <strong>Buster Call</strong> total sur Egghead — non plus seulement pour capturer les pirates, mais pour faire taire définitivement le secret du Siècle Vide. L'ordre est partiellement contrecarré quand on découvre que les Pacifistas de l'île obéissent en priorité à Bonney plutôt qu'aux Cinq Anciens : elle les retourne contre la flotte de la Marine. Submergé de colère, Saturn transperce Vegapunk lui-même.</p>
+
+      <!-- IMAGE: Saturn -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/d/db/Jaygarcia_Saturn_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142638" alt="Jaygarcia Saturn" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Jaygarcia Saturn, l'un des Cinq Anciens, qui paiera de sa vie son échec à Egghead.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🤖 L'Émet, le robot antique</h4>
+          <p>Un gigantesque robot de guerre datant du Siècle Vide, préservé en secret par Saturn depuis 200 ans (il avait autrefois escaladé la Red Line et envahi Mary Geoise avant de tomber en panne), est réactivé pour couvrir la fuite de l'équipage. Fonctionnant sur une énergie que même Vegapunk ne sait pas reproduire, il incarne littéralement une technologie perdue, supérieure à tout ce que le présent peut produire.</p>
+        </div>
+        <div class="info-box">
+          <h4>🧬 Les Satellites survivants</h4>
+          <p>Shaka, Pythagoras, Edison et Atlas survivent en fusionnant leur conscience dans un seul corps. <strong>Punk Records</strong> — l'archive complète des recherches de Vegapunk, y compris les livres sauvés d'Ohara — se détache de l'île et s'enfuit, hors de portée du Gouvernement. Lilith, restée aux côtés de l'équipage, affirme détenir un moyen de ramener Vegapunk malgré sa mort.</p>
+        </div>
+      </div>
+      <p>Luffy, en Gear 5, dégage assez de Haki des Rois pour assommer une partie des forces adverses. Grâce à l'arrivée des Pirates Guerriers Géants (dont Dorry et Brogy), l'équipage embarque à bord du Thousand Sunny et du navire des géants, et s'échappe définitivement de l'île — Kizaru et les troupes restantes ne pouvant plus les arrêter.</p>
+      <div class="event">
+        <h4>⚡ Événement majeur — la mort de Saturn et l'arrivée de Garling</h4>
+        <p>Pour avoir échoué à empêcher la diffusion du message, Saturn est éliminé par <strong>Imu</strong> lui-même, sans procès ni pitié. Un nouveau cinquième Ancien est aussitôt nommé : <strong>Figarland Garling</strong> — un Dragon Céleste dont on découvrira bien plus tard qu'il est le père biologique de Shanks.</p>
+        <div class="impact"><strong>Portée :</strong> même au sommet de la hiérarchie officielle, l'échec se paie de la vie. Imu ne tolère ni la défaite ni la fuite d'information — un rappel brutal que la terreur ne s'arrête jamais au bas de la pyramide.</div>
+      </div>
+      <div class="reflect">
+        <span class="tag">💭 Réflexion — que reste-t-il d'un être qu'on a réduit au silence ?</span>
+        Le geste de Kuma pour sauver Bonney, malgré un esprit techniquement effacé, pose une question vertigineuse sur l'identité : que reste-t-il d'un être humain quand on lui a retiré mémoire et volonté ? La série semble répondre que certains liens — ici, l'amour paternel — s'inscrivent plus profondément que la conscience elle-même.
+      </div>
+    </div>
+  </details>
+
+  <details class="arc" open>
+    <summary>Épilogue d'Egghead <span class="arc-range">ch. 1122–1125</span></summary>
+    <div class="arc-body">
+      <p>L'équipage, Bonney, Kuma et Lilith, sains et saufs, mettent le cap sur Elbaf, la prochaine destination indiquée par le log pose — celle-là même dont Luffy et Usopp rêvent depuis leur toute première rencontre avec Dorry et Brogy, plus de mille chapitres plus tôt. Un flash-back de deux semaines révèle que Vegapunk avait déjà percé la trahison de York <em>avant même le début de l'arc</em>, et avait délibérément choisi d'effacer sa propre mémoire de cette période pour garantir l'authenticité et la sécurité du plan — un dernier tour de force scénaristique qui explique pourquoi les Satellites eux-mêmes ont semblé découvrir chaque révélation en même temps que le lecteur.</p>
+
+      <!-- IMAGE: Dorry et Brogy à Elbaf -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/2/2c/Dorry_and_Brogy_Elbaf_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142533" alt="Dorry et Brogy à Elbaf" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Dorry et Brogy, les guerriers géants d'Elbaf, accueillent l'équipage sur l'île légendaire.</div>
+      </div>
+
+      <div class="tag-row">
+        <span class="tag-pill">Bilan : 68 chapitres</span>
+        <span class="tag-pill">2 ans de publication réelle</span>
+        <span class="tag-pill">5 morts parmi les figures du pouvoir</span>
+        <span class="tag-pill">1 message qui change tout</span>
+      </div>
+    </div>
+  </details>
+</section>
+</div>
+
+<div class="wrap">
+<section class="saga tech" id="saga-elbaf">
+  <div class="saga-head">
+    <div class="saga-seal">12</div>
+    <h3>Elbaf — l'arrivée sur l'île des géants</h3>
+    <div class="saga-meta">Ch. 1126–1130 · les tout premiers pas d'un arc encore en cours</div>
+  </div>
+  <p class="saga-intro">Le rêve d'enfant d'Usopp — et la promesse vieille de plus de mille chapitres — se concrétise enfin. Ce carnet s'arrête volontairement au chapitre 1130 : la porte d'Elbaf vient tout juste de s'ouvrir.</p>
+
+  <details class="arc" open>
+    <summary>Deuil et cap sur Elbaf <span class="arc-range">ch. 1124–1126</span></summary>
+    <div class="arc-body">
+      <p>Après la bataille, Kizaru fait son rapport à Sakazuki (Akainu) pendant que l'équipage, soulagé, célèbre sa survie et met le cap vers Elbaf. À bord des navires de la Marine, ailleurs, la Rousse (Red Hair Pirates) détruit le Barto Club sans ménagement pour régler ses comptes ; les Pirates de Barbe Noire, eux, planifient discrètement leur prochain mouvement. En chemin vers Elbaf, six membres de l'équipage — Luffy, Zoro, Nami, Usopp et Chopper, à bord du Thousand Sunny — sont mystérieusement séparés du reste du groupe.</p>
+    </div>
+  </details>
+
+  <details class="arc" open>
+    <summary>Le piège du « Pays de Mystère » <span class="arc-range">ch. 1127–1129</span></summary>
+    <div class="arc-body">
+      <p>Nami se réveille seule dans une forteresse aux allures de jouets de construction géants, poursuivie par des animaux à taille de titan : un chat nommé Iscat, un porc-épic géant qu'elle électrocute avec Zeus. Le petit groupe se retrouve, rejoint Usopp coincé dans la gueule d'Iscat, et comprend peu à peu qu'ils sont enfermés dans un immense <strong>diorama</strong> — une maquette à taille humaine construite par quelqu'un de bien plus grand qu'eux, peuplée d' « animaux-dieux » (le « Dieu-Aiguille », le « Dieu-Oreille » — un lapin que Luffy a déjà mangé sans le savoir, au grand désespoir d'Usopp qui tente désespérément de l'empêcher d'avouer).</p>
+      <p>Le maître des lieux, un « Dieu Soleil » masqué et furieux de voir son temple incendié par la bande, se révèle être <strong>Road</strong>, un membre des Nouveaux Pirates Guerriers Géants qui s'amusait à collectionner les naufragés égarés dans les brumes d'Elbaf comme des jouets vivants. Grâce à un plan retrouvé par Nami et à la force brute de Luffy (Gear 5) et Zeus, le groupe brise le mur du diorama et s'échappe à dos d'Iscat, direction la sortie.</p>
+
+      <!-- IMAGE: Elbaf -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/8/8a/Elbaf_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142607" alt="Elbaf" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Elbaf, l'île légendaire des géants, enfin atteinte après plus de mille chapitres.</div>
+      </div>
+
+      <div class="reflect">
+        <span class="tag">💭 Réflexion — retour à l'aventure pure</span>
+        Après 70 chapitres de tension géopolitique quasi ininterrompue, Oda choisit délibérément de rouvrir la saga finale sur un intermède presque entièrement comique — cinq membres historiques de l'équipage livrés à eux-mêmes, sans enjeu mondial immédiat. Un choix de rythme qui rappelle que même au cœur d'un thriller de fin de règne, la série n'oublie jamais d'où elle vient.
+      </div>
+    </div>
+  </details>
+
+  <details class="arc" open>
+    <summary>Le Prince Maudit <span class="arc-range">ch. 1130</span></summary>
+    <div class="arc-body">
+      <p>Le groupe débouche enfin dans les véritables montagnes d'Elbaf, face à un château perché relié par un pont de corde à un arbre si immense qu'il dépasse les montagnes elles-mêmes : l'Arbre-Trésor <strong>Adam</strong>, le bois le plus précieux du monde (celui-là même qui donne naissance aux plus grands navires légendaires). Pendant que le reste du groupe emprunte le pont vers le château, Luffy saute directement en contrebas — et tombe nez à nez avec un prisonnier enchaîné au pied de l'arbre : <strong>Loki</strong>.</p>
+      <p>Le géant se présente lui-même comme le « Dieu Soleil qui apportera la fin du monde ». Les autres géants l'ont surnommé le <strong>Prince Maudit</strong> : il aurait tué son propre père, le roi Harald, pour s'emparer d'un Fruit du Démon légendaire, et il a fallu la totalité des guerriers d'Elbaf pour le maîtriser et l'enchaîner dans les Enfers de l'île, six ans durant.</p>
+
+      <!-- IMAGE: Loki -->
+      <div class="img-block" style="margin:12px 0;">
+        <img src="https://static.wikia.nocookie.net/onepiece/images/3/33/Loki_Anime_Infobox.png/revision/latest/scale-to-width-down/500?cb=20230922142715" alt="Loki" loading="lazy" style="max-height:300px;">
+        <div class="img-caption">Loki, le Prince Maudit d'Elbaf, enchaîné au pied de l'Arbre Adam.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>🧑‍🤝‍🧑 Personnages à suivre</h4>
+          <p><strong>Loki</strong> est présenté avec un statut proche de celui de Luffy version Gear 5 dans l'imaginaire collectif d'Elbaf — un « dieu » redouté de tous. Son surnom (le Prince Maudit) et l'accusation de régicide restent à ce stade non vérifiés du point de vue du lecteur : rien ne confirme encore sa version des faits ni celle des géants.</p>
+        </div>
+      </div>
+      <div class="event">
+        <h4>⚡ Point d'étape — le carnet s'arrête ici</h4>
+        <p>Au chapitre 1130, Loki reste une inconnue totale : allié, ennemi, ou victime d'un récit officiel biaisé (un motif que la série a déjà exploré à plusieurs reprises — Sabo, Ohara, Robin) ? La suite immédiate le verra proposer un marché à Luffy en échange de sa liberté.</p>
+        <div class="impact"><strong>Portée narrative à ce stade :</strong> Elbaf s'annonce comme le théâtre d'un nouveau conflit entre la légende officielle d'un royaume et une vérité enfouie — exactement le moule narratif qui a fait la force de la série depuis Alabasta, mais appliqué cette fois à la nation la plus puissante et la plus ancienne encore debout.</div>
+      </div>
+    </div>
+  </details>
+</section>
+</div>
+
+<hr class="divider">
+
+<div class="wrap">
+<h2 class="section-h" id="mysteres">Mystères non résolus au chapitre 1130</h2>
+<p class="lede-p">De quoi nourrir vos propres théories avant de reprendre la lecture.</p>
+<table class="data-table">
+  <tr><th>Mystère</th><th>Ce qu'on sait</th><th>Ce qu'on ignore encore</th></tr>
+  <tr><td><strong>Imu</strong></td><td>Occupe le Trône Vide, tue sans procès, possède un pouvoir capable de neutraliser six haki-utilisateurs de rang Empereur simultanément (vu en flash-back à God Valley)</td><td>Espèce, âge réel, lien exact avec le Siècle Vide et avec Joy Boy</td></tr>
+  <tr><td><strong>La Volonté du D.</strong></td><td>Désigne, selon Imu, « l'ennemi » historique du Gouvernement Mondial ; portée par plusieurs lignées (Monkey, Roger, Nefertari, Rocks)</td><td>Son origine exacte, sa signification complète — le message de Vegapunk à ce sujet a été coupé net</td></tr>
+  <tr><td><strong>Uranus</strong></td><td>Fortement suggéré comme étant l'arme ayant rayé Lulusia de la carte, aux mains du Gouvernement</td><td>Sa forme exacte, sa localisation confirmée, son fonctionnement</td></tr>
+  <tr><td><strong>God Valley, le film complet</strong></td><td>La version de Kuma s'arrête avant l'affrontement Roger/Garp/Rocks/Imu</td><td>Le déroulé exact de cette bataille reste, à ce stade du carnet, non montré</td></tr>
+  <tr><td><strong>Vivi</strong></td><td>Portée disparue depuis la Reverie, activement recherchée dans les journaux</td><td>Sa localisation et son état actuels</td></tr>
+  <tr><td><strong>Le « Grand Nettoyage »</strong></td><td>Mentionné par les Cinq Anciens comme un projet en cours, lié à la montée des eaux</td><td>Son objectif final assumé</td></tr>
+  <tr><td><strong>Loki</strong></td><td>Emprisonné pour le meurtre supposé de son père le roi Harald ; se proclame « Dieu Soleil »</td><td>La véracité de cette accusation, ses intentions réelles</td></tr>
+  <tr><td><strong>Laugh Tale &amp; le One Piece</strong></td><td>Existent réellement, confirmés par Vegapunk ; Roger et son équipage l'ont atteint</td><td>Localisation, nature exacte du trésor</td></tr>
+</table>
+</div>
+
+<div class="wrap">
+<hr class="divider">
+<h2 class="section-h" id="reflexions">Le fil des réflexions</h2>
+<p class="lede-p">Au-delà de l'intrigue, quelques motifs reviennent sans cesse, arc après arc — les voici rassemblés.</p>
+<div class="info-grid" style="grid-template-columns:repeat(2,1fr);">
+  <div class="info-box">
+    <h4>🔁 Le cycle de la violence</h4>
+    <p>D'Arlong à Big Mom en passant par les Vinsmoke, la série montre à répétition comment l'oppression subie se retransmet, si rien ne vient briser la chaîne — sans jamais excuser la violence qui en résulte.</p>
+  </div>
+  <div class="info-box">
+    <h4>⚖️ Réformer ou renverser</h4>
+    <p>Vivi et Sabo incarnent deux réponses légitimes à l'injustice systémique — rester à l'intérieur pour changer les règles, ou les combattre de l'extérieur. Ni l'une ni l'autre voie n'est présentée comme définitivement supérieure.</p>
+  </div>
+  <div class="info-box">
+    <h4>📖 Qui écrit l'Histoire ?</h4>
+    <p>D'Ohara au message de Vegapunk, la série pose sans relâche la question du monopole de la vérité historique — et de ce qu'il en coûte de vouloir la rétablir.</p>
+  </div>
+  <div class="info-box">
+    <h4>👪 La famille, refuge ou prison</h4>
+    <p>Face aux « familles choisies » (l'équipage, les Révolutionnaires), la série multiplie les familles biologiques instrumentalisées (Charlotte, Vinsmoke, Nefertari) — la parenté par le sang n'y est jamais un gage de sécurité affective.</p>
+  </div>
+  <div class="info-box">
+    <h4>🗣️ Le pouvoir des récits</h4>
+    <p>Des derniers mots de Roger au message de Vegapunk, One Piece répète qu'un récit diffusé publiquement peut faire plus de dégâts — ou plus de bien — qu'une armée entière.</p>
+  </div>
+  <div class="info-box">
+    <h4>💔 Le prix de la protection</h4>
+    <p>Zoro pour Luffy, Sora pour Sanji, Kuma pour Bonney : la série revient sans cesse sur l'idée qu'aimer, dans ce monde, implique souvent de disparaître un peu — parfois totalement — pour l'autre.</p>
+  </div>
+</div>
+</div>
+
+<div class="wrap">
+<hr class="divider">
+<h2 class="section-h" id="lexique">Lexique rapide</h2>
+<div class="info-grid">
+  <div class="info-box">
+    <h4>Le Haki</h4>
+    <ul>
+      <li><strong>Observation :</strong> percevoir au-delà des cinq sens (présences, anticipation des coups).</li>
+      <li><strong>Armement :</strong> revêtir son corps ou ses armes d'une force invisible capable de blesser les Logia.</li>
+      <li><strong>Rois (Conquérant) :</strong> rarissime, permet d'assommer les volontés plus faibles par simple émanation — trait associé aux futurs grands meneurs.</li>
+    </ul>
+  </div>
+  <div class="info-box">
+    <h4>Fruits du Démon</h4>
+    <ul>
+      <li><strong>Paramecia :</strong> effets divers sur le corps ou l'environnement du mangeur.</li>
+      <li><strong>Zoan :</strong> transformation animale, avec une sous-catégorie <em>Mythique</em> pour les créatures légendaires.</li>
+      <li><strong>Logia :</strong> transformation en élément naturel, quasi-invulnérabilité aux attaques physiques.</li>
+      <li><strong>Éveil :</strong> stade avancé rarissime qui étend les effets du fruit à l'environnement, voire au-delà du corps du mangeur.</li>
+    </ul>
+  </div>
+  <div class="info-box">
+    <h4>Autres repères</h4>
+    <ul>
+      <li><strong>Ponéglyphes :</strong> pierres indestructibles gravées durant le Siècle Vide, seule trace de l'Histoire réelle.</li>
+      <li><strong>Den Den Mushi :</strong> escargots téléphoniques, principal moyen de communication (et de diffusion d'images/messages) du monde.</li>
+      <li><strong>Buster Call :</strong> frappe navale totale, décrétée pour rayer une île de la carte.</li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<footer class="colophon">
+  Carnet compilé pour usage personnel — synthèse et mise en perspective de la série <em>One Piece</em> d'Eiichiro Oda, du chapitre 1 au chapitre 1130. Les bornes de chapitres sont indicatives. ☙ Bon vent. ❧
+</footer>
+
+</main>
+</div>
+
+<button class="mobile-toc-btn" onclick="document.getElementById('toc-toggle').checked = !document.getElementById('toc-toggle').checked">☰</button>
+
+<script>
+mermaid.initialize({
+  startOnLoad:true,
+  theme:'base',
+  themeVariables:{
+    darkMode:true,
+    background:'#0d0f16',
+    primaryColor:'#1c2133',
+    primaryTextColor:'#f4efe0',
+    primaryBorderColor:'#c9a24b',
+    lineColor:'#c9a24b',
+    secondaryColor:'#123842',
+    tertiaryColor:'#151926',
+    fontFamily:'Crimson Pro, Georgia, serif',
+    fontSize:'14px'
+  },
+  timeline:{ disableMulticolor:false }
+});
+// Close mobile TOC when a link is clicked
+document.querySelectorAll('.toc-rail nav a').forEach(function(a){
+  a.addEventListener('click', function(){
+    var cb = document.getElementById('toc-toggle');
+    if(cb) cb.checked = false;
+  });
+});
+
+// Thème clair / sombre
+(function(){
+  var root = document.documentElement;
+  var btn = document.getElementById('theme-toggle');
+  var icon = document.getElementById('theme-icon');
+  var label = document.getElementById('theme-label');
+  function apply(theme){
+    if(theme === 'light'){
+      root.setAttribute('data-theme','light');
+      icon.textContent = '🌙';
+      label.textContent = 'Mode sombre';
+    } else {
+      root.removeAttribute('data-theme');
+      icon.textContent = '☀️';
+      label.textContent = 'Mode clair';
+    }
+  }
+  apply('dark');
+  btn.addEventListener('click', function(){
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    apply(current === 'light' ? 'dark' : 'light');
+  });
+})();
+</script>
+</body>
+</html>
